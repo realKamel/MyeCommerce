@@ -1,1 +1,41 @@
-<p>navbar-blank works!</p>
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top py-3 shadow">
+	<div class="container">
+		<div routerLink="home" class="text-center pointer d-flex justify-content-center align-items-center gap-1">
+			<div>
+				<i class="fa-solid fa-cart-shopping text-main-green nav-icon"></i>
+			</div>
+			<a class="navbar-brand d-block h3 bold">Fresh Cart</a>
+		</div>
+		<button class="navbar-toggler border-0 text-black" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+			<i class="fa-solid fa-bars"></i></button>
+
+		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+			<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="home" routerLinkActive="active" aria-current="page">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="wishlist">Wish List</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="product">Products</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="categories">Categories</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="active" routerLink="brands">Brands</a>
+				</li>
+			</ul>
+			<div class="d-flex justify-content-center align-items-center gap-3">
+				<div routerLink="cart"
+					class="cart d-flex justify-content-center align-items-center text center pointer">
+					<i class="fa-solid fa-cart-shopping fa-xl "></i>
+				</div>
+				<div class="">
+					<a class="nav-link pointer" aria-current="page">Log Out</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
