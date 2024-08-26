@@ -3,6 +3,19 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
+
+.flexx
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.bg-main-green{
+	background-color: #4fa74f !important;
+	color: white;
+}
 .text-main-green{
 	color: #4fa74f;
 }
@@ -13,4 +26,8 @@
 .pointer
 {
 	cursor: pointer;
+}
+
+.mt-100{
+	margin-top: 100px;
 }
