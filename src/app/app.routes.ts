@@ -1,3 +1,38 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
-export const routes: Routes = [];
+import { AuthComponent } from "./layouts/auth/auth.component";
+import { BlankComponent } from "./layouts/blank/blank.component";
+import { NotfoundComponent } from "./components/notfound/notfound.component";
+import { LoginComponent } from "./components/login/login.component";
+import { RegisterComponent } from "./components/register/register.component";
+import { HomeComponent } from "./components/home/home.component";
+import { CartComponent } from "./components/cart/cart.component";
+import { BrandsComponent } from "./components/brands/brands.component";
+import { CategorieComponent } from "./components/categorie/categorie.component";
+import { ProductComponent } from "./components/product/product.component";
+import { WishlistComponent } from "./components/wishlist/wishlist.component";
+
+// TODO re-arrnge the routing to make login first
+export const routes: Routes = [
+	{
+		path: "",
+		component: BlankComponent,
+		children: [
+			{ path: "Home", component: HomeComponent },
+			{ path: "cart", component: CartComponent },
+			{ path: "brands", component: BrandsComponent },
+			{ path: "categories", component: CategorieComponent },
+			{ path: "product", component: ProductComponent },
+			{ path: "wishlist", component: WishlistComponent },
+		],
+	},
+	{
+		path: "",
+		component: AuthComponent,
+		children: [
+			{ path: "login", component: LoginComponent },
+			{ path: "register", component: RegisterComponent },
+		],
+	},
+	{ path: "**", component: NotfoundComponent },
+];
