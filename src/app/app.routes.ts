@@ -18,7 +18,7 @@ export const routes: Routes = [
 		path: "",
 		component: BlankComponent,
 		children: [
-			{ path: "Home", component: HomeComponent },
+			{ path: "home", component: HomeComponent },
 			{ path: "cart", component: CartComponent },
 			{ path: "brands", component: BrandsComponent },
 			{ path: "categories", component: CategorieComponent },
