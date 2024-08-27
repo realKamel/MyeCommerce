@@ -12,12 +12,15 @@ import { CategorieComponent } from "./components/categorie/categorie.component";
 import { ProductComponent } from "./components/product/product.component";
 import { WishlistComponent } from "./components/wishlist/wishlist.component";
 import { ProductDetailsComponent } from "./components/product-details/product-details.component";
+import { authGuard } from "./guards/auth.guard";
+import { logedInGuard } from "./guards/loged-in.guard";
 
-// TODO re-arrnge the routing to make login first
+// TODO making Guards logic
 export const routes: Routes = [
 	{
 		path: "",
 		component: BlankComponent,
+		canActivate: [authGuard],
 		children: [
 			{ path: "", redirectTo: "home", pathMatch: "full" },
 			{ path: "home", component: HomeComponent },
@@ -32,6 +35,7 @@ export const routes: Routes = [
 	{
 		path: "",
 		component: AuthComponent,
+		canActivate: [logedInGuard],
 		children: [
 			{ path: "", redirectTo: "login", pathMatch: "full" },
 			{ path: "login", component: LoginComponent },
