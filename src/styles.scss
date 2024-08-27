@@ -2,15 +2,17 @@
 
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
-
 :root {
 	--main-color: #4fa74f;
+}
+.min-dvh {
+	min-width: 100dvh;
 }
 .flexx {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-wrap: nowrap;
+	flex-wrap: wrap;
 }
 
 .bg-main-green {

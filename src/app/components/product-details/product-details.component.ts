@@ -3,11 +3,13 @@ import { ActivatedRoute } from "@angular/router";
 import { ProductsService } from "../../services/products.service";
 import { IProduct } from "../../interfaces/iproduct";
 import { Subscription } from "rxjs";
+import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
+import { NgbRating } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
 	selector: "app-product-details",
 	standalone: true,
-	imports: [],
+	imports: [CarouselModule, NgbRating],
 	templateUrl: "./product-details.component.html",
 	styleUrl: "./product-details.component.scss",
 })
@@ -33,6 +35,17 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 			},
 		});
 	}
+	customOptions: OwlOptions = {
+		loop: true,
+		mouseDrag: true,
+		touchDrag: true,
+		pullDrag: false,
+		dots: false,
+		navSpeed: 700,
+		navText: ["", ""],
+		items: 1,
+		nav: true,
+	};
 
 	ngOnDestroy(): void {
 		this.SpcificProdSubscribe?.unsubscribe();

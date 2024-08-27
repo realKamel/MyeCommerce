@@ -3,11 +3,12 @@ import { ProductsService } from "../../services/products.service";
 import { Subscription } from "rxjs";
 import { IProduct } from "../../interfaces/iproduct";
 import { NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
+import { RouterLink } from "@angular/router";
 
 @Component({
 	selector: "app-home",
 	standalone: true,
-	imports: [NgbRatingModule],
+	imports: [NgbRatingModule, RouterLink],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })

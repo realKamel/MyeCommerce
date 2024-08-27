@@ -4,10 +4,7 @@ import { provideRouter, RouterModule } from "@angular/router";
 import { routes } from "./app.routes";
 import { provideClientHydration } from "@angular/platform-browser";
 import { provideHttpClient, withFetch } from "@angular/common/http";
-import {
-	BrowserAnimationsModule,
-	provideAnimations,
-} from "@angular/platform-browser/animations";
+import { provideAnimations } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 export const appConfig: ApplicationConfig = {
@@ -16,6 +13,6 @@ export const appConfig: ApplicationConfig = {
 		provideClientHydration(),
 		provideHttpClient(withFetch()),
 		provideAnimations(),
-		importProvidersFrom(NgbModule, RouterModule, BrowserAnimationsModule),
+		importProvidersFrom(NgbModule, RouterModule),
 	],
 };

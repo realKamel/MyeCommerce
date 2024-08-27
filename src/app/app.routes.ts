@@ -11,6 +11,7 @@ import { BrandsComponent } from "./components/brands/brands.component";
 import { CategorieComponent } from "./components/categorie/categorie.component";
 import { ProductComponent } from "./components/product/product.component";
 import { WishlistComponent } from "./components/wishlist/wishlist.component";
+import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 
 // TODO re-arrnge the routing to make login first
 export const routes: Routes = [
@@ -25,12 +26,14 @@ export const routes: Routes = [
 			{ path: "categories", component: CategorieComponent },
 			{ path: "product", component: ProductComponent },
 			{ path: "wishlist", component: WishlistComponent },
+			{ path: "ProductDetails/:id", component: ProductDetailsComponent },
 		],
 	},
 	{
 		path: "",
 		component: AuthComponent,
 		children: [
+			{ path: "", redirectTo: "login", pathMatch: "full" },
 			{ path: "login", component: LoginComponent },
 			{ path: "register", component: RegisterComponent },
 		],
