@@ -18,6 +18,7 @@ export const routes: Routes = [
 		path: "",
 		component: BlankComponent,
 		children: [
+			{ path: "", redirectTo: "home", pathMatch: "full" },
 			{ path: "home", component: HomeComponent },
 			{ path: "cart", component: CartComponent },
 			{ path: "brands", component: BrandsComponent },

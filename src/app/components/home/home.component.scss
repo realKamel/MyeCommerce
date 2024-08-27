@@ -1,3 +1,10 @@
+.card {
+	transition: all 0.5s;
+	position: relative;
+}
+.card:hover {
+	filter: drop-shadow(0 0 0.75rem var(--main-color));
+}
 .card i {
 	position: relative;
 	display: inline-block;
@@ -12,4 +19,22 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.add-btn {
+	transition: all 0.5s;
+	position: relative;
+	transform: translateY(300px);
+}
+.add-btn:hover {
+	color: white !important;
+	filter: brightness(0.8);
+}
+
+.fa-heart:hover {
+	color: red !important;
+}
+
+.card:hover .add-btn {
+	transform: translateY(0);
 }

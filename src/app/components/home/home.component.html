@@ -1,10 +1,10 @@
-<section class="py-5 bg-white rounded-2 shadow">
-	<div class="row justify-content-center align-items-center">
+<section class="py-5 bg-white rounded-2">
+	<div class="row justify-content-center align-items-center g-3">
 		@if (AllProdRes) {
-		@for (prod of AllProdRes; track $index) {
-		<div class="col-3">
-			<div class="card border-0" style="width: 18rem;">
-				<img [src]="prod.imageCover" class="card-img-top" alt="">
+		@for (prod of AllProdRes; track prod._id) {
+		<div class="col-md-6 col-lg-3 flexx">
+			<div class="card border-0 col-sm-12 px-2 rounded overflow-hidden">
+				<img [src]="prod.imageCover" class="card-img-top w-100 rounded" alt="{{prod.title}}">
 				<div class="card-body">
 					<p class="text-main-green">{{prod.category.name}}</p>
 					<h5 class="card-title">{{prod.title.split(' ',2).join(' ')}}</h5>
@@ -22,8 +22,13 @@
 							<span>{{prod.ratingsAverage}}</span>
 						</div>
 					</div>
-					<div class="flex justify-content-center align-items-center">
-						<a class="btn bg-main-green d-block"> + Add</a>
+					<div class="flexx justify-content-between">
+						<a class="add-btn btn bg-main-green d-block w-75"> + Add
+							<i class="fa-solid fa-cart-shopping text-white"></i>
+						</a>
+						<span class="d-block w-25 d-flex justify-content-end">
+							<i class="fa-solid fa-heart fs-2 pointer "></i>
+						</span>
 					</div>
 				</div>
 			</div>

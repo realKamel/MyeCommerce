@@ -1,33 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
-
-.flexx
-{
+:root {
+	--main-color: #4fa74f;
+}
+.flexx {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: nowrap;
 }
 
-.bg-main-green{
-	background-color: #4fa74f !important;
+.bg-main-green {
+	background-color: var(--main-color) !important;
 	color: white;
 }
-.text-main-green{
-	color: #4fa74f;
+.text-main-green {
+	color: var(--main-color);
 }
-.two-rem
-{
+.fs-\[2rem\] {
 	font-size: 2rem;
 }
-.pointer
-{
+.pointer {
 	cursor: pointer;
 }
 
-.mt-100{
+.mt-100 {
 	margin-top: 100px;
+}
+
+.fa-solid {
+	transition: all 0.5s;
 }
