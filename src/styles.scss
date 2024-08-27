@@ -5,6 +5,13 @@
 :root {
 	--main-color: #4fa74f;
 }
+.card {
+	transition: all 0.5s;
+	position: relative;
+}
+.card:hover {
+	filter: drop-shadow(0 0 0.75rem var(--main-color));
+}
 .min-dvh {
 	min-width: 100dvh;
 }

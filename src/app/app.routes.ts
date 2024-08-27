@@ -20,7 +20,7 @@ export const routes: Routes = [
 	{
 		path: "",
 		component: BlankComponent,
-		canActivate: [authGuard],
+		canActivate: [logedInGuard],
 		children: [
 			{ path: "", redirectTo: "home", pathMatch: "full" },
 			{ path: "home", component: HomeComponent },
@@ -35,7 +35,7 @@ export const routes: Routes = [
 	{
 		path: "",
 		component: AuthComponent,
-		canActivate: [logedInGuard],
+		canActivate: [authGuard],
 		children: [
 			{ path: "", redirectTo: "login", pathMatch: "full" },
 			{ path: "login", component: LoginComponent },

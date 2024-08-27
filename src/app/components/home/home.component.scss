@@ -2,14 +2,6 @@
 	object-position: center;
 	object-fit: cover;
 }
-
-.card {
-	transition: all 0.5s;
-	position: relative;
-}
-.card:hover {
-	filter: drop-shadow(0 0 0.75rem var(--main-color));
-}
 .card i {
 	position: relative;
 	display: inline-block;
