@@ -6,7 +6,7 @@
 			</div>
 			<span class="navbar-brand h3">Fresh Cart</span>
 		</div>
-		<button class="navbar-toggler border-0 text-black" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+		<button class="navbar-toggler border-0 text-black" type="button" (click)="toggleCollapse()">
 			<i class="fa-solid fa-bars"></i></button>
 
 		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
