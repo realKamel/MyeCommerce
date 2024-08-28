@@ -7,11 +7,19 @@ import { RouterLink } from "@angular/router";
 import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
 import { CategoriesService } from "../../services/categories.service";
 import { ICategory } from "../../interfaces/icategory";
+import { SearchFilterPipe } from "../../pipes/search-filter.pipe";
+import { FormsModule } from "@angular/forms";
 
 @Component({
 	selector: "app-home",
 	standalone: true,
-	imports: [NgbRatingModule, RouterLink, CarouselModule],
+	imports: [
+		NgbRatingModule,
+		RouterLink,
+		CarouselModule,
+		FormsModule,
+		SearchFilterPipe,
+	],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })
@@ -22,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	AllCategoriesRes: ICategory[] | null = null;
 	private AllProdSubscribe!: Subscription;
 	private AllCategoriesSub!: Subscription;
-
+	searchTerm: string = "";
 	catCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
