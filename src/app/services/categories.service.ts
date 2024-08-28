@@ -11,9 +11,15 @@ export class CategoriesService {
 	getAllCategories(): Observable<any> {
 		return this._HttpClient.get(`${environment.BaseUrl}/api/v1/categories`);
 	}
-	getSpecificCategory(id: string | number): Observable<any> {
+	getSpecificCategory(id: string | null): Observable<any> {
 		return this._HttpClient.get(
 			`${environment.BaseUrl}/api/v1/categories/${id}`
+		);
+	}
+
+	getAllSubCategoriesOnCategory(id: string): Observable<any> {
+		return this._HttpClient.get(
+			`${environment.BaseUrl}/api/v1/categories/${id}/subcategories`
 		);
 	}
 }

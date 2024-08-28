@@ -10,7 +10,7 @@
 	position: relative;
 }
 .card:hover {
-	filter: drop-shadow(0 0 0.75rem var(--main-color));
+	box-shadow: 1px 1px 10px var(--main-color);
 }
 .min-dvh {
 	min-width: 100dvh;

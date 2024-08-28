@@ -1,10 +1,4 @@
 img {
-    object-position: center;
-    object-fit: cover;
-}
-.card{
-	transition: all 0.5s;
-}
-.card:hover {
-	filter: drop-shadow(0 0 0.75rem var(--main-color));
+	object-position: center;
+	object-fit: cover;
 }
