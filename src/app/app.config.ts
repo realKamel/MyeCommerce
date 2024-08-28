@@ -1,5 +1,10 @@
 import { ApplicationConfig, importProvidersFrom } from "@angular/core";
-import { provideRouter, RouterModule } from "@angular/router";
+import {
+	provideRouter,
+	RouterModule,
+	withHashLocation,
+	withInMemoryScrolling,
+} from "@angular/router";
 
 import { routes } from "./app.routes";
 import { provideClientHydration } from "@angular/platform-browser";
@@ -9,7 +14,13 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-		provideRouter(routes),
+		provideRouter(
+			routes,
+			withInMemoryScrolling({
+				scrollPositionRestoration: "top",
+			}),
+			withHashLocation()
+		),
 		provideClientHydration(),
 		provideHttpClient(withFetch()),
 		provideAnimations(),
