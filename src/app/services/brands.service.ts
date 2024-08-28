@@ -13,7 +13,7 @@ export class BrandsService {
 		return this._HttpClient.get(`${environment.BaseUrl}/api/v1/brands`);
 	}
 
-	getSpecificBrand(id: string | number): Observable<any> {
+	getSpecificBrand(id: string): Observable<any> {
 		return this._HttpClient.get(
 			`${environment.BaseUrl}/api/v1/brands/${id}`
 		);

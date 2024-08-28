@@ -1,12 +1,70 @@
-import { Component } from '@angular/core';
+import {
+	Component,
+	inject,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+} from "@angular/core";
+import {
+	ModalDismissReasons,
+	NgbDatepickerModule,
+	NgbModal,
+} from "@ng-bootstrap/ng-bootstrap";
+import { BrandsService } from "../../services/brands.service";
+import { IBrand } from "../../interfaces/ibrand";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-brands',
-  standalone: true,
-  imports: [],
-  templateUrl: './brands.component.html',
-  styleUrl: './brands.component.scss'
+	selector: "app-brands",
+	standalone: true,
+	imports: [],
+	templateUrl: "./brands.component.html",
+	styleUrl: "./brands.component.scss",
 })
-export class BrandsComponent {
+export class BrandsComponent implements OnInit, OnDestroy {
+	private modalService = inject(NgbModal);
+	private _BrandsService = inject(BrandsService);
+	closeResult = "";
+	AllBrands!: IBrand[];
+	AllBrandsSubscription!: Subscription;
 
+	ngOnInit(): void {
+		this.AllBrandsSubscription = this._BrandsService
+			.getAllBrands()
+			.subscribe({
+				next: (res) => {
+					this.AllBrands = res.data;
+				},
+				error: (err) => {
+					console.log(err);
+				},
+			});
+	}
+	open(content: TemplateRef<any>) {
+		this.modalService
+			.open(content, { ariaLabelledBy: "modal-basic-title" })
+			.result.then(
+				(result) => {
+					this.closeResult = `Closed with: ${result}`;
+				},
+				(reason) => {
+					this.closeResult = `Dismissed ${this.getDismissReason(
+						reason
+					)}`;
+				}
+			);
+	}
+	private getDismissReason(reason: any): string {
+		switch (reason) {
+			case ModalDismissReasons.ESC:
+				return "by pressing ESC";
+			case ModalDismissReasons.BACKDROP_CLICK:
+				return "by clicking on a backdrop";
+			default:
+				return `with: ${reason}`;
+		}
+	}
+	ngOnDestroy(): void {
+		this.AllBrandsSubscription?.unsubscribe();
+	}
 }
