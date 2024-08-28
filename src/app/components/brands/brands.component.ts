@@ -3,13 +3,11 @@ import {
 	inject,
 	OnDestroy,
 	OnInit,
+	signal,
 	TemplateRef,
+	WritableSignal,
 } from "@angular/core";
-import {
-	ModalDismissReasons,
-	NgbDatepickerModule,
-	NgbModal,
-} from "@ng-bootstrap/ng-bootstrap";
+import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BrandsService } from "../../services/brands.service";
 import { IBrand } from "../../interfaces/ibrand";
 import { Subscription } from "rxjs";
@@ -24,8 +22,8 @@ import { Subscription } from "rxjs";
 export class BrandsComponent implements OnInit, OnDestroy {
 	private modalService = inject(NgbModal);
 	private _BrandsService = inject(BrandsService);
-	closeResult = "";
-	AllBrands!: IBrand[];
+	closeResult: WritableSignal<string> = signal("");
+	AllBrands: WritableSignal<IBrand[]> = signal([]);
 	AllBrandsSubscription!: Subscription;
 
 	ngOnInit(): void {
@@ -33,7 +31,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
 			.getAllBrands()
 			.subscribe({
 				next: (res) => {
-					this.AllBrands = res.data;
+					this.AllBrands.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);
@@ -45,12 +43,12 @@ export class BrandsComponent implements OnInit, OnDestroy {
 			.open(content, { ariaLabelledBy: "modal-basic-title" })
 			.result.then(
 				(result) => {
-					this.closeResult = `Closed with: ${result}`;
+					this.closeResult.set(`Closed with: ${result}`);
 				},
 				(reason) => {
-					this.closeResult = `Dismissed ${this.getDismissReason(
-						reason
-					)}`;
+					this.closeResult.set(
+						`Dismissed ${this.getDismissReason(reason)}`
+					);
 				}
 			);
 	}

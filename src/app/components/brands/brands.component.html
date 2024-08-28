@@ -1,8 +1,8 @@
 <section class="my-4">
 	<h1 class="text-center mb-5 text-main-green">All Brands</h1>
 	<div class="row g-4">
-		@if (AllBrands) {
-		@for (item of AllBrands; track item._id) {
+		@if (AllBrands()) {
+		@for (item of AllBrands(); track item._id) {
 		<div class="col-md-3">
 			<ng-template #content let-modal>
 				<div class="modal-header">
@@ -18,7 +18,7 @@
 								<p>{{item.name}}</p>
 							</div>
 							<div class="col-md-6">
-								<img class="img-fluid" [src]="item.image" alt="{{item.name}}">
+								<img class="img-fluid" [src]="item.image" alt="">
 							</div>
 						</div>
 					</div>
@@ -40,4 +40,5 @@
 		}
 		}
 	</div>
+
 </section>

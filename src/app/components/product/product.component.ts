@@ -1,4 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
+import {
+	Component,
+	inject,
+	OnDestroy,
+	OnInit,
+	signal,
+	WritableSignal,
+} from "@angular/core";
 import { ProductsService } from "../../services/products.service";
 import { IProduct } from "../../interfaces/iproduct";
 import { Subscription } from "rxjs";
@@ -16,17 +23,16 @@ import { SearchFilterPipe } from "../../pipes/search-filter.pipe";
 })
 export class ProductComponent implements OnInit, OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
-	AllProdRes: IProduct[] | null = null;
+	AllProdRes: WritableSignal<IProduct[]> = signal([]);
+	searchTerm: WritableSignal<string> = signal("");
 	private AllProdSubscribe!: Subscription;
-
-	searchTerm: string = "";
 
 	ngOnInit(): void {
 		this.AllProdSubscribe = this._ProductsService
 			.getAllProducts()
 			.subscribe({
 				next: (res) => {
-					this.AllProdRes = res.data;
+					this.AllProdRes.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);

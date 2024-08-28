@@ -1,4 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
+import {
+	Component,
+	inject,
+	OnDestroy,
+	OnInit,
+	signal,
+	WritableSignal,
+} from "@angular/core";
 import { CategoriesService } from "../../services/categories.service";
 import { ICategory } from "../../interfaces/icategory";
 import { Subscription } from "rxjs";
@@ -13,8 +20,10 @@ import { ISubcategory } from "../../interfaces/isubcategory";
 })
 export class CategorieComponent implements OnInit, OnDestroy {
 	_CategoriesService = inject(CategoriesService);
-	AllCategoriesRes!: ICategory[];
-	getAllSubCategoriesOnCategoryRes!: ISubcategory[];
+	AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
+	getAllSubCategoriesOnCategoryRes: WritableSignal<ISubcategory[]> = signal(
+		[]
+	);
 	private AllCategoriesSub!: Subscription;
 	private getAllSubCategoriesOnCategorySub!: Subscription;
 	ngOnInit(): void {
@@ -22,7 +31,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
 			.getAllCategories()
 			.subscribe({
 				next: (res) => {
-					this.AllCategoriesRes = res.data;
+					this.AllCategoriesRes.set(res.data);
 				},
 			});
 	}
@@ -33,7 +42,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
 			.subscribe({
 				next: (res) => {
 					console.log(res);
-					this.getAllSubCategoriesOnCategoryRes = res.data;
+					this.getAllSubCategoriesOnCategoryRes.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);

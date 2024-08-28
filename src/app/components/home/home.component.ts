@@ -1,4 +1,11 @@
-import { Component, inject, OnDestroy, OnInit } from "@angular/core";
+import {
+	Component,
+	inject,
+	OnDestroy,
+	OnInit,
+	signal,
+	WritableSignal,
+} from "@angular/core";
 import { ProductsService } from "../../services/products.service";
 import { Subscription } from "rxjs";
 import { IProduct } from "../../interfaces/iproduct";
@@ -26,11 +33,11 @@ import { FormsModule } from "@angular/forms";
 export class HomeComponent implements OnInit, OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly _CategoriesService = inject(CategoriesService);
-	AllProdRes: IProduct[] | null = null;
-	AllCategoriesRes: ICategory[] | null = null;
+	AllProdRes: WritableSignal<IProduct[]> = signal([]);
+	AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
 	private AllProdSubscribe!: Subscription;
 	private AllCategoriesSub!: Subscription;
-	searchTerm: string = "";
+	searchTerm: WritableSignal<string> = signal("");
 	catCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
@@ -84,7 +91,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 			.getAllProducts()
 			.subscribe({
 				next: (res) => {
-					this.AllProdRes = res.data;
+					this.AllProdRes.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);
@@ -94,7 +101,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 			.getAllCategories()
 			.subscribe({
 				next: (res) => {
-					this.AllCategoriesRes = res.data;
+					this.AllCategoriesRes.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);

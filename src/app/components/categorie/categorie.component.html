@@ -1,7 +1,7 @@
-@if (AllCategoriesRes) {
+@if (AllCategoriesRes()) {
 <div class="container my-5 py-5">
 	<div class="row g-4">
-		@for (cat of AllCategoriesRes; track cat._id) {
+		@for (cat of AllCategoriesRes(); track cat._id) {
 		<div class="col-md-4">
 			<div class="card pointer" (click)="getAllSubCategoriesOnCategory(cat._id)">
 				<div class="card-img w-100 overflow-hidden" style="height: 300px;">
@@ -20,9 +20,9 @@
 
 <!-- Sub Categories Section -->
 <section class="my-4">
-	@if (getAllSubCategoriesOnCategoryRes) {
+	@if (getAllSubCategoriesOnCategoryRes()) {
 	<div class="row gy-3">
-		@for (item of getAllSubCategoriesOnCategoryRes; track item._id) {
+		@for (item of getAllSubCategoriesOnCategoryRes(); track item._id) {
 		<div class="col-md-4">
 			<div class="card pointer">
 				<p class="h3 text-center p-3">{{item.name}}</p>
