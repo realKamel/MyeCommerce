@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	catCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
-		touchDrag: false,
+		touchDrag: true,
 		pullDrag: false,
 		dots: false,
 		navSpeed: 700,
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	staticCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
-		touchDrag: false,
+		touchDrag: true,
 		pullDrag: false,
 		dots: false,
 		navSpeed: 700,
@@ -68,10 +68,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 				items: 1,
 			},
 			400: {
-				items: 2,
+				items: 1,
 			},
 			740: {
-				items: 3,
+				items: 2,
 			},
 			940: {
 				items: 4,
