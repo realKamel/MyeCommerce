@@ -2,7 +2,6 @@ import {
 	Component,
 	inject,
 	OnDestroy,
-	OnInit,
 	signal,
 	WritableSignal,
 } from "@angular/core";
@@ -16,11 +15,13 @@ import {
 } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Subscription } from "rxjs";
+import { NgClass } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
 	selector: "app-register",
 	standalone: true,
-	imports: [ReactiveFormsModule],
+	imports: [ReactiveFormsModule, NgClass, RouterLink],
 	templateUrl: "./register.component.html",
 	styleUrl: "./register.component.scss",
 })
@@ -75,6 +76,9 @@ export class RegisterComponent implements OnDestroy {
 						this.isLoading.set(false);
 					},
 				});
+		} else {
+			this.registerForm.setErrors({ mismatch: true });
+			this.registerForm.markAllAsTouched();
 		}
 	}
 	ngOnDestroy(): void {

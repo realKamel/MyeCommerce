@@ -6,6 +6,7 @@ import {
 	RouterLinkActive,
 } from "@angular/router";
 import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
 	selector: "app-navbar-blank",
@@ -17,6 +18,7 @@ import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
 export class NavbarBlankComponent implements OnInit {
 	isMenuCollapsed = true;
 	private _Router = inject(Router);
+	private _AuthService = inject(AuthService);
 
 	ngOnInit() {
 		this._Router.events.subscribe((event) => {
@@ -27,5 +29,9 @@ export class NavbarBlankComponent implements OnInit {
 	}
 	toggleCollapse() {
 		this.isMenuCollapsed = !this.isMenuCollapsed;
+	}
+	logOut() {
+		this._AuthService.deleteUserToken();
+		this._Router.navigate(["/login"]);
 	}
 }
