@@ -21,11 +21,10 @@ import { ISubcategory } from "../../interfaces/isubcategory";
 export class CategorieComponent implements OnInit, OnDestroy {
 	_CategoriesService = inject(CategoriesService);
 	AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
-	getAllSubCategoriesOnCategoryRes: WritableSignal<ISubcategory[]> = signal(
-		[]
-	);
+	SubCategoryName: WritableSignal<string> = signal("");
+	AllSubCategoriesOnCategoryRes: WritableSignal<ISubcategory[]> = signal([]);
 	private AllCategoriesSub!: Subscription;
-	private getAllSubCategoriesOnCategorySub!: Subscription;
+	private AllSubCategoriesOnCategorySub!: Subscription;
 	ngOnInit(): void {
 		this.AllCategoriesSub = this._CategoriesService
 			.getAllCategories()
@@ -36,13 +35,14 @@ export class CategorieComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	getAllSubCategoriesOnCategory(id: string) {
-		this.getAllSubCategoriesOnCategorySub = this._CategoriesService
+	AllSubCategoriesOnCategory(id: string, name: string) {
+		this.AllSubCategoriesOnCategorySub = this._CategoriesService
 			.getAllSubCategoriesOnCategory(id)
 			.subscribe({
 				next: (res) => {
 					console.log(res);
-					this.getAllSubCategoriesOnCategoryRes.set(res.data);
+					this.AllSubCategoriesOnCategoryRes.set(res.data);
+					this.SubCategoryName.set(name);
 				},
 				error: (err) => {
 					console.log(err);
@@ -51,6 +51,6 @@ export class CategorieComponent implements OnInit, OnDestroy {
 	}
 	ngOnDestroy(): void {
 		this.AllCategoriesSub?.unsubscribe();
-		this.getAllSubCategoriesOnCategorySub?.unsubscribe();
+		this.AllSubCategoriesOnCategorySub?.unsubscribe();
 	}
 }
