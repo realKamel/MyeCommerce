@@ -40,10 +40,14 @@ export class CategorieComponent implements OnInit, OnDestroy {
 			.getAllSubCategoriesOnCategory(id)
 			.subscribe({
 				next: (res) => {
-					console.log(res);
 					this.AllSubCategoriesOnCategoryRes.set(res.data);
-					this.SubCategoryName.set(name);
+					if (this.AllSubCategoriesOnCategoryRes().length !== 0) {
+						this.SubCategoryName.set(name);
+					} else {
+						this.SubCategoryName.set("");
+					}
 				},
+
 				error: (err) => {
 					console.log(err);
 				},
