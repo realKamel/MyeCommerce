@@ -1,1 +1,35 @@
-<p>register works!</p>
+<section>
+	<div class="container my-5 py-5">
+		<h2>Register now :</h2>
+		<form [formGroup]="registerForm" (ngSubmit)="test()">
+			<div class="form-floating my-3">
+				<input formControlName="name" type="text" class="form-control mb-3" id="floatingNameInput"
+					placeholder="Name">
+				<label for="floatingNameInput">Name</label>
+			</div>
+			<div class="form-floating my-3">
+				<input formControlName="email" type="email" class="form-control mb-3" id="floatingInputEmail"
+					placeholder="name@example.com">
+				<label for="floatingInputEmail">Email address</label>
+			</div>
+			<div class="form-floating my-3">
+				<input formControlName="password" type="password" class="form-control mb-3" id="floatingPassword"
+					placeholder="Password">
+				<label for="floatingPassword">Password</label>
+			</div>
+			<div class="form-floating my-3">
+				<input formControlName="rePassword" type="password" class="form-control mb-3" id="floatingrePassword"
+					placeholder="Re-Password">
+				<label for="floatingrePassword">Re-Password</label>
+			</div>
+			<div class="form-floating my-3">
+				<input formControlName="phone" type="tel" class="form-control mb-3" id="floatingInputPhone"
+					placeholder="Phone Number">
+				<label for="floatingInputPhone">Phone Number</label>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-success btn-lg d-block ms-auto">Resiter Now</button>
+			</div>
+		</form>
+	</div>
+</section>
