@@ -7,6 +7,7 @@ import {
 } from "@angular/router";
 import { NgbCollapseModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../services/auth.service";
+import { IUser } from "../../interfaces/iuser";
 
 @Component({
 	selector: "app-navbar-blank",
@@ -32,6 +33,7 @@ export class NavbarBlankComponent implements OnInit {
 	}
 	logOut() {
 		this._AuthService.deleteUserToken();
+		this._AuthService.userData = {} as IUser;
 		this._Router.navigate(["/login"]);
 	}
 }

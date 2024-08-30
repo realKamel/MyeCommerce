@@ -69,13 +69,22 @@
 				}
 			</div>
 			}
-			<!-- Submit Button -->
+
 			<div>
+				<div class="alert p-0">
+					<a
+						[routerLink]="['/forget']"
+						class="link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+					>
+						Forget Password ?
+					</a>
+				</div>
 				@if (errMsg()) {
 				<div class="alert alert-danger">
 					<p class="m-0">{{ errMsg() }}</p>
 				</div>
 				}
+				<!-- Submit Button -->
 				<button
 					[disabled]="logInForm.invalid || isLoading()"
 					type="submit"

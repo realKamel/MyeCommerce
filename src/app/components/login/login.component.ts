@@ -14,13 +14,13 @@ import {
 	Validators,
 } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
 
 @Component({
 	selector: "app-login",
 	standalone: true,
-	imports: [ReactiveFormsModule, NgClass],
+	imports: [ReactiveFormsModule, NgClass, RouterLink],
 	templateUrl: "./login.component.html",
 	styleUrl: "./login.component.scss",
 })

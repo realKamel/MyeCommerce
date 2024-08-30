@@ -14,8 +14,8 @@ import { WishlistComponent } from "./components/wishlist/wishlist.component";
 import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { authGuard } from "./guards/auth.guard";
 import { logedInGuard } from "./guards/loged-in.guard";
+import { ForgetPasswordComponent } from "./components/forget-password/forget-password.component";
 
-// TODO making Guards logic
 export const routes: Routes = [
 	{
 		path: "",
@@ -40,6 +40,7 @@ export const routes: Routes = [
 			{ path: "", redirectTo: "login", pathMatch: "full" },
 			{ path: "login", component: LoginComponent },
 			{ path: "register", component: RegisterComponent },
+			{ path: "forget", component: ForgetPasswordComponent },
 		],
 	},
 	{ path: "**", component: NotfoundComponent },

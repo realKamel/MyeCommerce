@@ -50,7 +50,7 @@ export class RegisterComponent implements OnDestroy {
 			rePassword: new FormControl(null),
 			phone: new FormControl(null, [
 				Validators.required,
-				Validators.pattern(/^01[0125][0-9]{8}$/),
+				Validators.pattern(/^01[0125]\d{8}$/),
 			]),
 		},
 		this.checkPasswords

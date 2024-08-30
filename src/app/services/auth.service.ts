@@ -24,30 +24,23 @@ export class AuthService {
 			userDate
 		);
 	}
-	forgetPassword(email: string): Observable<any> {
+	forgetPassword(userDate: object): Observable<any> {
 		return this._HttpClient.post(
 			`${environment.BaseUrl}/api/v1/auth/forgotPasswords`,
-			{
-				email: `${email}`,
-			}
+			userDate
 		);
 	}
-	verifyResetCode(code: string): Observable<any> {
+	verifyResetCode(userDate: object): Observable<any> {
 		return this._HttpClient.post(
-			`${environment.BaseUrl}/api/v1/users/changeMyPassword`,
-			{
-				resetCode: `${code}`,
-			}
+			`${environment.BaseUrl}/api/v1/auth/verifyResetCode`,
+			userDate
 		);
 	}
 
-	resetPassword(email: string, password: string): Observable<any> {
+	resetPassword(userDate: object): Observable<any> {
 		return this._HttpClient.put(
 			`${environment.BaseUrl}/api/v1/auth/resetPassword`,
-			{
-				email: `${email}`,
-				newPassword: `${password}`,
-			}
+			userDate
 		);
 	}
 
@@ -56,9 +49,7 @@ export class AuthService {
 		this.userData = jwtDecode(s);
 	}
 	getUserToken() {
-		if (localStorage.getItem("userToken") !== null)
-			return localStorage.getItem("userToken");
-		else return null;
+		return localStorage.getItem("userToken");
 	}
 	deleteUserToken() {
 		localStorage.removeItem("userToken");
