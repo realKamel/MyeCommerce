@@ -12,11 +12,12 @@ import { IProduct } from "../../interfaces/iproduct";
 import { Subscription } from "rxjs";
 import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
 import { NgbRating } from "@ng-bootstrap/ng-bootstrap";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
 	selector: "app-product-details",
 	standalone: true,
-	imports: [CarouselModule, NgbRating],
+	imports: [CarouselModule, NgbRating, CurrencyPipe],
 	templateUrl: "./product-details.component.html",
 	styleUrl: "./product-details.component.scss",
 })

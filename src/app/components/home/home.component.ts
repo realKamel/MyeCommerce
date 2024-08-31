@@ -6,36 +6,23 @@ import {
 	signal,
 	WritableSignal,
 } from "@angular/core";
-import { ProductsService } from "../../services/products.service";
 import { Subscription } from "rxjs";
-import { IProduct } from "../../interfaces/iproduct";
-import { NgbRatingModule } from "@ng-bootstrap/ng-bootstrap";
 import { RouterLink } from "@angular/router";
 import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
 import { CategoriesService } from "../../services/categories.service";
 import { ICategory } from "../../interfaces/icategory";
-import { SearchFilterPipe } from "../../pipes/search-filter.pipe";
-import { FormsModule } from "@angular/forms";
+import { ProductComponent } from "../product/product.component";
 
 @Component({
 	selector: "app-home",
 	standalone: true,
-	imports: [
-		NgbRatingModule,
-		RouterLink,
-		CarouselModule,
-		FormsModule,
-		SearchFilterPipe,
-	],
+	imports: [RouterLink, CarouselModule, ProductComponent],
 	templateUrl: "./home.component.html",
 	styleUrl: "./home.component.scss",
 })
 export class HomeComponent implements OnInit, OnDestroy {
-	private readonly _ProductsService = inject(ProductsService);
 	private readonly _CategoriesService = inject(CategoriesService);
-	AllProdRes: WritableSignal<IProduct[]> = signal([]);
 	AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
-	private AllProdSubscribe!: Subscription;
 	private AllCategoriesSub!: Subscription;
 	searchTerm: WritableSignal<string> = signal("");
 	catCustomOptions: OwlOptions = {
@@ -87,16 +74,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 		nav: true,
 	};
 	ngOnInit(): void {
-		this.AllProdSubscribe = this._ProductsService
-			.getAllProducts()
-			.subscribe({
-				next: (res) => {
-					this.AllProdRes.set(res.data);
-				},
-				error: (err) => {
-					console.log(err);
-				},
-			});
 		this.AllCategoriesSub = this._CategoriesService
 			.getAllCategories()
 			.subscribe({
@@ -108,9 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 				},
 			});
 	}
-
 	ngOnDestroy(): void {
-		this.AllProdSubscribe?.unsubscribe();
 		this.AllCategoriesSub?.unsubscribe();
 	}
 }

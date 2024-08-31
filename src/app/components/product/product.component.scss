@@ -17,14 +17,15 @@ i {
 .add-btn {
 	transition: all 0.5s;
 	position: relative;
-	
 }
 .add-btn:hover {
 	color: white !important;
 	filter: brightness(0.8);
 }
 
+.make-red {
+	color: red !important;
+}
 .fa-heart:hover {
 	color: red !important;
 }
-

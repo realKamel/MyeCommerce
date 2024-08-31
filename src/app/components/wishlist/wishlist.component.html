@@ -1,1 +1,35 @@
-<p>wishlist works!</p>
+<section>
+	<div class="container py-5 my-5 p-5 bg-light rounded">
+		<div class="justify-content-between mb-4">
+			<h2 class="">My Wishlist</h2>
+			@for (item of getLoggedUserWishlistRes(); track item._id) {
+			<div class="row border-bottom my-3 d-flex align-items-center p-2">
+				<div class="col-md-2">
+					<img
+						[src]="item.imageCover"
+						class="w-100"
+						[alt]="item.title"
+					/>
+				</div>
+				<div class="col-md-10 d-flex justify-content-between">
+					<div>
+						<h5>{{ item.title }}</h5>
+						<h6 class="text-main-green">
+							E{{ item.price | currency : "GBP" }}
+						</h6>
+						<button class="btn btn-sm m-0 p-0 text-danger">
+							<i class="fa fa-trash"></i>
+							Remove
+						</button>
+					</div>
+					<div>
+						<button class="btn-border btn btn-lg d-block mx-auto">
+							Add to Cart
+						</button>
+					</div>
+				</div>
+			</div>
+			}
+		</div>
+	</div>
+</section>
