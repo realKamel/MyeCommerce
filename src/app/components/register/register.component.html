@@ -1,28 +1,17 @@
 <section>
 	<div class="container my-5 py-5">
 		<h2>Register now:</h2>
-		<form
-			class="mt-3"
-			[formGroup]="registerForm"
-			(ngSubmit)="submitRegisterForm()"
-		>
+		<form class="mt-3" [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
 			<!-- Name Input -->
 			<div class="form-floating my-3">
-				<input
-					[ngClass]="{
+				<input [ngClass]="{
 						'is-valid':
 							!registerForm.get('name')?.errors &&
 							registerForm.get('name')?.touched,
 						'is-invalid':
 							registerForm.get('name')?.errors &&
 							registerForm.get('name')?.touched
-					}"
-					formControlName="name"
-					type="text"
-					class="form-control mb-3"
-					id="floatingNameInput"
-					placeholder="Name"
-				/>
+					}" formControlName="name" type="text" class="form-control mb-3" id="floatingNameInput" placeholder="Name" />
 				<label for="floatingNameInput">Name</label>
 			</div>
 			@if (registerForm.get('name')?.errors &&
@@ -41,21 +30,15 @@
 
 			<!-- Email Input -->
 			<div class="form-floating my-3">
-				<input
-					[ngClass]="{
+				<input [ngClass]="{
 						'is-valid':
 							!registerForm.get('email')?.errors &&
 							registerForm.get('email')?.touched,
 						'is-invalid':
 							registerForm.get('email')?.errors &&
 							registerForm.get('email')?.touched
-					}"
-					formControlName="email"
-					type="email"
-					class="form-control mb-3"
-					id="floatingInputEmail"
-					placeholder="name@example.com"
-				/>
+					}" formControlName="email" type="email" class="form-control mb-3" id="floatingInputEmail"
+					placeholder="name@example.com" />
 				<label for="floatingInputEmail">Email address</label>
 			</div>
 			@if (registerForm.get('email')?.errors &&
@@ -75,21 +58,15 @@
 
 			<!-- Password Input -->
 			<div class="form-floating my-3">
-				<input
-					[ngClass]="{
+				<input [ngClass]="{
 						'is-valid':
 							!registerForm.get('password')?.errors &&
 							registerForm.get('password')?.touched,
 						'is-invalid':
 							registerForm.get('password')?.errors &&
 							registerForm.get('password')?.touched
-					}"
-					formControlName="password"
-					type="password"
-					class="form-control mb-3"
-					id="floatingPassword"
-					placeholder="Password"
-				/>
+					}" formControlName="password" type="password" class="form-control mb-3" id="floatingPassword"
+					placeholder="Password" />
 				<label for="floatingPassword">Password</label>
 			</div>
 			@if (registerForm.get('password')?.errors &&
@@ -106,21 +83,15 @@
 
 			<!-- Re-Password Input -->
 			<div class="form-floating my-3">
-				<input
-					[ngClass]="{
+				<input [ngClass]="{
 						'is-valid':
 							!registerForm.getError('mismatch') &&
 							registerForm.get('rePassword')?.touched,
 						'is-invalid':
 							registerForm.getError('mismatch') &&
 							registerForm.get('rePassword')?.touched
-					}"
-					formControlName="rePassword"
-					type="password"
-					class="form-control mb-3"
-					id="floatingrePassword"
-					placeholder="Re-Password"
-				/>
+					}" formControlName="rePassword" type="password" class="form-control mb-3" id="floatingrePassword"
+					placeholder="Re-Password" />
 				<label for="floatingrePassword">Re-Password</label>
 			</div>
 			@if (registerForm.getError('mismatch') &&
@@ -132,21 +103,15 @@
 
 			<!-- Phone Input -->
 			<div class="form-floating my-3">
-				<input
-					[ngClass]="{
+				<input [ngClass]="{
 						'is-valid':
 							!registerForm.get('phone')?.errors &&
 							registerForm.get('phone')?.touched,
 						'is-invalid':
 							registerForm.get('phone')?.errors &&
 							registerForm.get('phone')?.touched
-					}"
-					formControlName="phone"
-					type="tel"
-					class="form-control mb-3"
-					id="floatingInputPhone"
-					placeholder="Phone Number"
-				/>
+					}" formControlName="phone" type="tel" class="form-control mb-3" id="floatingInputPhone"
+					placeholder="Phone Number" />
 				<label for="floatingInputPhone">Phone Number</label>
 			</div>
 			@if (registerForm.get('phone')?.errors &&
@@ -163,27 +128,8 @@
 
 			<!-- Submit Button -->
 			<div>
-				@if (errMsg()) {
-				<div class="alert alert-danger">
-					@if (errMsg() === 'Account Already Exists') {
-					<p class="m-0">
-						{{ errMsg() }}
-						<span
-							[routerLink]="['/login']"
-							class="link-offset-2 fw-bold link-offset-3-hover link-underline link-underline-opacity-100 link-underline-opacity-75-hover pointer"
-							>Log in ?</span
-						>
-					</p>
-					} @else {
-					<p class="m-0">{{ errMsg() }}</p>
-					}
-				</div>
-				}
-				<button
-					[disabled]="registerForm.invalid || isLoading()"
-					type="submit"
-					class="btn btn-success btn-lg d-block ms-auto"
-				>
+				<button [disabled]="registerForm.invalid || isLoading()" type="submit"
+					class="btn btn-success btn-lg d-block ms-auto">
 					@if (isLoading()) {
 					<i class="fa-solid fa-spinner fa-spin"></i>
 					}@else { Register Now }

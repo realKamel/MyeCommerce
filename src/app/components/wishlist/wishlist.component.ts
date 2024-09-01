@@ -29,7 +29,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
 			next: (res: IWishlistRes) => {
 				this.cartCount.set(res.count);
 				this.getLoggedUserWishlistRes.set(res.data);
-				console.log(this.getLoggedUserWishlistRes);
+				console.log(this.getLoggedUserWishlistRes());
 			},
 			error: (err) => {
 				console.error(err);

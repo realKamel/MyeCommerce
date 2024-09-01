@@ -6,7 +6,7 @@ import {
 	WritableSignal,
 } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
-import { Subscription } from "rxjs";
+import { finalize, Subscription } from "rxjs";
 import {
 	FormControl,
 	FormGroup,
@@ -29,7 +29,6 @@ export class LoginComponent implements OnDestroy {
 	private _Router: Router = inject(Router);
 	private logInSub!: Subscription;
 	isLoading: WritableSignal<boolean> = signal(false);
-	errMsg: WritableSignal<string> = signal("");
 
 	logInForm: FormGroup = new FormGroup({
 		email: new FormControl(null, [Validators.required, Validators.email]),
@@ -43,18 +42,17 @@ export class LoginComponent implements OnDestroy {
 			this.isLoading.set(true);
 			this.logInSub = this._AuthService
 				.signIn(this.logInForm.value)
+				.pipe(finalize(() => this.isLoading.set(false)))
 				.subscribe({
 					next: (res) => {
 						console.log(res);
-						this.isLoading.set(false);
 						this._AuthService.setUserToken(res.token);
 						if (res.message === "success") {
 							this._Router.navigate(["/home"]);
 						}
 					},
 					error: (error: HttpErrorResponse) => {
-						this.errMsg.set(error.error.message);
-						this.isLoading.set(false);
+						console.error(error.error.message);
 					},
 				});
 		}

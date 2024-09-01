@@ -34,11 +34,11 @@ import { IWishlist } from "../../interfaces/iwishlist";
 export class ProductComponent implements OnInit, OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly _WishlistService = inject(WishlistService);
-	AllProdRes: WritableSignal<IProduct[]> = signal([]);
+	allProdRes: WritableSignal<IProduct[]> = signal([]);
 	private inWishListProudctsIds: string[] = [];
 	searchTerm: WritableSignal<string> = signal("");
 	private getLoggedUserWishlistSub!: Subscription;
-	private AllProdSubscribe!: Subscription;
+	private allProdSubscribe!: Subscription;
 	private removeProductFromWishlistSub!: Subscription;
 	private addProductToWishlistSub!: Subscription;
 
@@ -50,11 +50,11 @@ export class ProductComponent implements OnInit, OnDestroy {
 					this.inWishListProudctsIds = res.data.map(
 						(prod: IWishlist) => prod._id
 					);
-					this.AllProdSubscribe = this._ProductsService
+					this.allProdSubscribe = this._ProductsService
 						.getAllProducts()
 						.subscribe({
 							next: (res) => {
-								this.AllProdRes.set(
+								this.allProdRes.set(
 									res.data.map((product: IProduct) => {
 										product.inWishList =
 											this.inWishListProudctsIds.includes(
@@ -63,6 +63,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 										return product;
 									})
 								);
+								console.info(this.allProdRes());
 							},
 							error: (err) => {
 								console.error(err);
@@ -111,6 +112,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 		this.removeProductFromWishlistSub?.unsubscribe();
 		this.addProductToWishlistSub?.unsubscribe();
 		this.getLoggedUserWishlistSub?.unsubscribe();
-		this.AllProdSubscribe?.unsubscribe();
+		this.allProdSubscribe?.unsubscribe();
 	}
 }

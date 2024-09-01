@@ -14,7 +14,7 @@ import {
 	Validators,
 } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Subscription } from "rxjs";
+import { finalize, Subscription } from "rxjs";
 import { NgClass } from "@angular/common";
 import { RouterLink } from "@angular/router";
 
@@ -27,10 +27,8 @@ import { RouterLink } from "@angular/router";
 })
 export class RegisterComponent implements OnDestroy {
 	private _AuthService: AuthService = inject(AuthService);
-
 	private signUpSub!: Subscription;
 	isLoading: WritableSignal<boolean> = signal(false);
-	errMsg: WritableSignal<string> = signal("");
 
 	registerForm: FormGroup = new FormGroup(
 		{
@@ -66,14 +64,13 @@ export class RegisterComponent implements OnDestroy {
 			this.isLoading.set(true);
 			this.signUpSub = this._AuthService
 				.signUp(this.registerForm.value)
+				.pipe(finalize(() => this.isLoading.set(false)))
 				.subscribe({
 					next: (value) => {
 						console.log(value);
-						this.isLoading.set(false);
 					},
 					error: (error: HttpErrorResponse) => {
-						this.errMsg.set(error.error.message);
-						this.isLoading.set(false);
+						console.error(error.error.message);
 					},
 				});
 		} else {

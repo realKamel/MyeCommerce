@@ -5,15 +5,13 @@
 :root {
 	--main-color: #4fa74f;
 }
+
 .card {
 	transition: all 0.5s;
 	position: relative;
 }
 .card:hover {
 	box-shadow: 1px 1px 10px var(--main-color);
-}
-.min-dvh {
-	min-width: 100dvh;
 }
 .flexx {
 	display: flex;
@@ -34,10 +32,6 @@
 }
 .pointer {
 	cursor: pointer;
-}
-
-.mt-100 {
-	margin-top: 100px;
 }
 
 .fa-solid {

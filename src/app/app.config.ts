@@ -4,13 +4,23 @@ import {
 	RouterModule,
 	withHashLocation,
 	withInMemoryScrolling,
+	withViewTransitions,
 } from "@angular/router";
 
 import { routes } from "./app.routes";
 import { provideClientHydration } from "@angular/platform-browser";
-import { provideHttpClient, withFetch } from "@angular/common/http";
+import {
+	provideHttpClient,
+	withFetch,
+	withInterceptors,
+} from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { headerInterceptor } from "./interceptors/header.interceptor";
+import { errorInterceptor } from "./interceptors/error.interceptor";
+import { loadingInterceptor } from "./interceptors/loading.interceptor";
+import { provideToastr } from "ngx-toastr";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -19,11 +29,20 @@ export const appConfig: ApplicationConfig = {
 			withInMemoryScrolling({
 				scrollPositionRestoration: "top",
 			}),
-			withHashLocation()
+			withHashLocation(),
+			withViewTransitions()
 		),
 		provideClientHydration(),
-		provideHttpClient(withFetch()),
+		provideHttpClient(
+			withFetch(),
+			withInterceptors([
+				headerInterceptor,
+				errorInterceptor,
+				loadingInterceptor,
+			])
+		),
 		provideAnimations(),
-		importProvidersFrom(NgbModule, RouterModule),
+		importProvidersFrom(NgbModule, RouterModule, NgxSpinnerModule),
+		provideToastr(),
 	],
 };
