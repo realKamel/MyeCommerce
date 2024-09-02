@@ -15,6 +15,8 @@ import { ProductDetailsComponent } from "./components/product-details/product-de
 import { authGuard } from "./guards/auth.guard";
 import { logedInGuard } from "./guards/loged-in.guard";
 import { ForgetPasswordComponent } from "./components/forget-password/forget-password.component";
+import { CheckOutComponent } from "./components/check-out/check-out.component";
+import { AllOrdersComponent } from "./components/all-orders/all-orders.component";
 
 export const routes: Routes = [
 	{
@@ -30,6 +32,8 @@ export const routes: Routes = [
 			{ path: "product", component: ProductComponent },
 			{ path: "wishlist", component: WishlistComponent },
 			{ path: "ProductDetails/:id", component: ProductDetailsComponent },
+			{ path: "checkOut/:cart_id", component: CheckOutComponent },
+			{ path: "allorders", component: AllOrdersComponent },
 		],
 	},
 	{

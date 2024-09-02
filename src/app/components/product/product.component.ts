@@ -68,7 +68,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 										return product;
 									})
 								);
-								console.info(this.allProdRes());
 							},
 							error: (err) => {
 								console.error(err);
@@ -90,9 +89,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				.removeProductFromWishlist(id)
 				.subscribe({
 					next: (res) => {
-						console.log(res);
 						this.inWishListProudctsIds = res.data;
-						console.log(this.inWishListProudctsIds);
 					},
 					error: (err) => {
 						console.error(err);

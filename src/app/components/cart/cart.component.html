@@ -3,7 +3,8 @@
 	<div class="container py-5 my-5 p-5 bg-light rounded">
 		<div class="d-flex justify-content-between mb-4">
 			<h2>Cart Shop</h2>
-			<button class="btn btn-primary btn-lg ">Check Out</button>
+			<button [routerLink]="['/checkOut',getLoggedUserCartRes()._id]" class="btn btn-primary btn-lg ">Check
+				Out</button>
 		</div>
 		<div class="d-flex justify-content-between align-items-center ">
 			<h5>Total price: <span class="text-main-green">{{getLoggedUserCartRes().totalCartPrice}}</span></h5>
@@ -17,7 +18,7 @@
 			</div>
 			<div class="col-md-10 d-flex justify-content-between">
 				<div>
-					<h5>Woman Shawl</h5>
+					<h5>{{item.product.title}}</h5>
 					<h6 class="text-main-green">E{{ item.price| currency : "GBP" }}</h6>
 					<button (click)="this.removeItemFromCart(item.product._id)" class="btn btn-sm m-0 p-0 text-danger">
 						<i class="fa-solid fa-trash"></i>

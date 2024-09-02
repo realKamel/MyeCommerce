@@ -34,7 +34,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
 					this.AllBrands.set(res.data);
 				},
 				error: (err) => {
-					console.log(err);
+					console.error(err);
 				},
 			});
 	}

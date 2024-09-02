@@ -12,17 +12,21 @@ import { Subscription } from "rxjs";
 import { CurrencyPipe } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router, RouterLink } from "@angular/router";
+import { OrdersService } from "../../services/orders.service";
 
 @Component({
 	selector: "app-cart",
 	standalone: true,
-	imports: [CurrencyPipe],
+	imports: [CurrencyPipe,RouterLink],
 	templateUrl: "./cart.component.html",
 	styleUrl: "./cart.component.scss",
 })
 export class CartComponent implements OnInit, OnDestroy {
 	readonly _CartService = inject(CartService);
 	readonly _ToastrService = inject(ToastrService);
+	readonly _OrdersService = inject(OrdersService);
+	readonly _Router = inject(Router);
 	getLoggedUserCartRes: WritableSignal<ICart> = signal({} as ICart);
 	private getLoggedUserCartSub!: Subscription;
 	private removeSpecificCartItemSub!: Subscription;
@@ -37,6 +41,7 @@ export class CartComponent implements OnInit, OnDestroy {
 				},
 			});
 	}
+
 	updateCartProduct(id: string, q: number) {
 		this._CartService.updateCartProductQuantity(id, q).subscribe({
 			next: (res) => {
@@ -73,6 +78,7 @@ export class CartComponent implements OnInit, OnDestroy {
 			},
 		});
 	}
+
 	ngOnDestroy(): void {
 		this.getLoggedUserCartSub?.unsubscribe();
 		this.removeSpecificCartItemSub?.unsubscribe();

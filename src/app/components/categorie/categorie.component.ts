@@ -49,7 +49,7 @@ export class CategorieComponent implements OnInit, OnDestroy {
 				},
 
 				error: (err) => {
-					console.log(err);
+					console.error(err);
 				},
 			});
 	}

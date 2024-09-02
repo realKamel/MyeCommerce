@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 					this.allCategoriesRes.set(res.data);
 				},
 				error: (err) => {
-					console.log(err);
+					console.error(err);
 				},
 			});
 	}

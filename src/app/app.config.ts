@@ -2,7 +2,6 @@ import { ApplicationConfig, importProvidersFrom } from "@angular/core";
 import {
 	provideRouter,
 	RouterModule,
-	withHashLocation,
 	withInMemoryScrolling,
 	withViewTransitions,
 } from "@angular/router";
@@ -29,7 +28,7 @@ export const appConfig: ApplicationConfig = {
 			withInMemoryScrolling({
 				scrollPositionRestoration: "top",
 			}),
-			withHashLocation(),
+			//withHashLocation(),
 			withViewTransitions()
 		),
 		provideClientHydration(),

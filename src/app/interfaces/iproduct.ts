@@ -1,4 +1,3 @@
-import { WritableSignal } from "@angular/core";
 import { IBrand } from "./ibrand";
 import { ICategory } from "./icategory";
 import { ISubcategory } from "./isubcategory";
