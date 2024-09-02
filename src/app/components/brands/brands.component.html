@@ -1,5 +1,5 @@
 <section class="my-4">
-	<h1 class="text-center mb-5 text-main-green">All Brands</h1>
+	<h1 class="text-center mb-5 text-main-color">All Brands</h1>
 	<div class="row g-4">
 		@if (AllBrands()) {
 		@for (item of AllBrands(); track item._id) {
@@ -14,7 +14,7 @@
 					<div class="container">
 						<div class="row flexx">
 							<div class="col-md-6">
-								<h2 class="text-main-green">{{item.name}}</h2>
+								<h2 class="text-main-color">{{item.name}}</h2>
 								<p>{{item.name}}</p>
 							</div>
 							<div class="col-md-6">

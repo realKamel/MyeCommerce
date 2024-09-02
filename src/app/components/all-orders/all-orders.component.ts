@@ -28,7 +28,6 @@ export class AllOrdersComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.getUserOrdersSub = this._OrdersService.getUserOrders().subscribe({
 			next: (res) => {
-				console.log(res);
 				this.getUserOrders.set(res);
 			},
 			error: (err: HttpErrorResponse) => {

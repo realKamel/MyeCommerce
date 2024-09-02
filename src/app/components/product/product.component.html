@@ -14,7 +14,7 @@
 					class="card-img-top w-100 rounded" alt="{{ prod.title }}" />
 				<div class="card-body">
 					<div [routerLink]="['/ProductDetails', prod._id]">
-						<p class="text-main-green">{{ prod.category.name }}</p>
+						<p class="text-main-color">{{ prod.category.name }}</p>
 						<h5 class="card-title">
 							{{ prod.title.split(" ", 2).join(" ") }}
 						</h5>

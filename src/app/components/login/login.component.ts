@@ -45,7 +45,6 @@ export class LoginComponent implements OnDestroy {
 				.pipe(finalize(() => this.isLoading.set(false)))
 				.subscribe({
 					next: (res) => {
-						console.log(res);
 						this._AuthService.setUserToken(res.token);
 						if (res.message === "success") {
 							this._Router.navigate(["/home"]);

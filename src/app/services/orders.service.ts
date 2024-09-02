@@ -14,7 +14,6 @@ export class OrdersService {
 	private readonly _AuthService = inject(AuthService);
 
 	getUserOrders(): Observable<any> {
-		console.log(this._AuthService.userData.id);
 		return this._HttpClient.get(
 			`${environment.BaseUrl}/api/v1/orders/user/${this._AuthService.userData.id}`
 		);
