@@ -22,9 +22,9 @@ import { ProductComponent } from "../product/product.component";
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	private readonly _CategoriesService = inject(CategoriesService);
-	AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
-	private AllCategoriesSub!: Subscription;
+	allCategoriesRes: WritableSignal<ICategory[]> = signal([]);
 	searchTerm: WritableSignal<string> = signal("");
+	private allCategoriesSub!: Subscription;
 	catCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
@@ -74,11 +74,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 		nav: true,
 	};
 	ngOnInit(): void {
-		this.AllCategoriesSub = this._CategoriesService
+		this.allCategoriesSub = this._CategoriesService
 			.getAllCategories()
 			.subscribe({
 				next: (res) => {
-					this.AllCategoriesRes.set(res.data);
+					this.allCategoriesRes.set(res.data);
 				},
 				error: (err) => {
 					console.log(err);
@@ -86,6 +86,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 			});
 	}
 	ngOnDestroy(): void {
-		this.AllCategoriesSub?.unsubscribe();
+		this.allCategoriesSub?.unsubscribe();
 	}
 }

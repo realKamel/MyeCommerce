@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <section class="py-5 bg-white rounded-2">
 	<div class="form-floating my-5 w-75 mx-auto">
 		<input [value]="searchTerm()" (input)="onInput($event)" type="search" class="form-control" id="floatingInput"
@@ -36,13 +37,16 @@
 						</div>
 					</div>
 					<div class="flexx justify-content-between">
-						<a class="add-btn btn bg-main-green d-block w-75">
+						<button (click)="addToCart(prod._id)" class="add-btn btn bg-main-green d-block w-75">
 							+ Add
 							<i class="fa-solid fa-cart-shopping text-white"></i>
-						</a>
+						</button>
 						<span class="d-block w-25 d-flex justify-content-end">
-							<i (click)="addOrRemoveFromCart(prod.id,prod.inWishList)"
-								[ngClass]="{ 'make-red': prod.inWishList }" class="fa-solid fa-heart fs-2 pointer"></i>
+							<button (click)="addOrRemoveFromWishlist(prod.id,prod.inWishList)" class="btn">
+								<i [ngClass]="{ 'make-red': prod.inWishList }"
+									class="fa-solid fa-heart fs-2 pointer"></i>
+							</button>
+
 						</span>
 					</div>
 				</div>

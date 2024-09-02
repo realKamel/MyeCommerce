@@ -48,7 +48,7 @@
 <!-- Cateigory Carousel -->
 <section class="">
 	<owl-carousel-o [options]="catCustomOptions">
-		@for (cat of AllCategoriesRes(); track cat._id) {
+		@for (cat of allCategoriesRes(); track cat._id) {
 		<ng-template carouselSlide>
 			<img
 				[src]="cat.image"

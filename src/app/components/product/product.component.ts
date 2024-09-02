@@ -16,6 +16,8 @@ import { SearchFilterPipe } from "../../pipes/search-filter.pipe";
 import { CurrencyPipe, NgClass } from "@angular/common";
 import { WishlistService } from "../../services/wishlist.service";
 import { IWishlist } from "../../interfaces/iwishlist";
+import { CartService } from "../../services/cart.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: "app-product",
@@ -34,6 +36,8 @@ import { IWishlist } from "../../interfaces/iwishlist";
 export class ProductComponent implements OnInit, OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly _WishlistService = inject(WishlistService);
+	private readonly _CartService = inject(CartService);
+	private readonly _ToastrService = inject(ToastrService);
 	allProdRes: WritableSignal<IProduct[]> = signal([]);
 	private inWishListProudctsIds: string[] = [];
 	searchTerm: WritableSignal<string> = signal("");
@@ -41,6 +45,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 	private allProdSubscribe!: Subscription;
 	private removeProductFromWishlistSub!: Subscription;
 	private addProductToWishlistSub!: Subscription;
+	private addProductToCartSub!: Subscription;
 
 	ngOnInit() {
 		this.getLoggedUserWishlistSub = this._WishlistService
@@ -79,7 +84,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 		const inputElement = event.target as HTMLInputElement;
 		this.searchTerm.set(inputElement.value);
 	}
-	addOrRemoveFromCart(id: string, inWishList: boolean = false) {
+	addOrRemoveFromWishlist(id: string, inWishList: boolean = false) {
 		if (inWishList) {
 			this.removeProductFromWishlistSub = this._WishlistService
 				.removeProductFromWishlist(id)
@@ -108,10 +113,22 @@ export class ProductComponent implements OnInit, OnDestroy {
 				});
 		}
 	}
+	addToCart(id: string) {
+		this.addProductToCartSub = this._CartService
+			.addProductToCart(id)
+			.subscribe({
+				next: (res) => {
+					console.log(res.message);
+					this._CartService.numOfCartItems.set(res.numOfCartItems);
+					this._ToastrService.success(res.message);
+				},
+			});
+	}
 	ngOnDestroy(): void {
 		this.removeProductFromWishlistSub?.unsubscribe();
 		this.addProductToWishlistSub?.unsubscribe();
 		this.getLoggedUserWishlistSub?.unsubscribe();
 		this.allProdSubscribe?.unsubscribe();
+		this.addProductToCartSub?.unsubscribe();
 	}
 }
