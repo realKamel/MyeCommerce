@@ -8,7 +8,7 @@ import {
 } from "@angular/core";
 import { ProductsService } from "../../services/products.service";
 import { IProduct } from "../../interfaces/iproduct";
-import { Subscription } from "rxjs";
+import { finalize, Subscription } from "rxjs";
 import { NgbRating } from "@ng-bootstrap/ng-bootstrap";
 import { RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -39,7 +39,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 	private readonly _CartService = inject(CartService);
 	private readonly _ToastrService = inject(ToastrService);
 	allProdRes: WritableSignal<IProduct[]> = signal([]);
-	private inWishListProudctsIds: string[] = [];
 	searchTerm: WritableSignal<string> = signal("");
 	private getLoggedUserWishlistSub!: Subscription;
 	private allProdSubscribe!: Subscription;
@@ -52,7 +51,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 			.getLoggedUserWishlist()
 			.subscribe({
 				next: (res) => {
-					this.inWishListProudctsIds = res.data.map(
+					this._WishlistService.inWishListProudctsIds = res.data.map(
 						(prod: IWishlist) => prod._id
 					);
 					this.allProdSubscribe = this._ProductsService
@@ -62,7 +61,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 								this.allProdRes.set(
 									res.data.map((product: IProduct) => {
 										product.inWishList =
-											this.inWishListProudctsIds.includes(
+											this._WishlistService.inWishListProudctsIds.includes(
 												product.id
 											);
 										return product;
@@ -87,9 +86,20 @@ export class ProductComponent implements OnInit, OnDestroy {
 		if (inWishList) {
 			this.removeProductFromWishlistSub = this._WishlistService
 				.removeProductFromWishlist(id)
+				.pipe(
+					finalize(() => {
+						this.allProdRes().map((product: IProduct) => {
+							product.inWishList =
+								this._WishlistService.inWishListProudctsIds.includes(
+									product.id
+								);
+							return product;
+						});
+					})
+				)
 				.subscribe({
 					next: (res) => {
-						this.inWishListProudctsIds = res.data;
+						this._WishlistService.inWishListProudctsIds = res.data;
 					},
 					error: (err) => {
 						console.error(err);
@@ -98,11 +108,21 @@ export class ProductComponent implements OnInit, OnDestroy {
 		} else {
 			this.addProductToWishlistSub = this._WishlistService
 				.addProductToWishlist(id)
+				.pipe(
+					finalize(() => {
+						this.allProdRes().map((product: IProduct) => {
+							product.inWishList =
+								this._WishlistService.inWishListProudctsIds.includes(
+									product.id
+								);
+							return product;
+						});
+					})
+				)
 				.subscribe({
 					next: (res) => {
 						console.log(res);
-						this.inWishListProudctsIds = res.data;
-						console.log(this.inWishListProudctsIds);
+						this._WishlistService.inWishListProudctsIds = res.data;
 					},
 					error: (err) => {
 						console.error(err);

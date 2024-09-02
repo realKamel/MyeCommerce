@@ -11,27 +11,20 @@ export class WishlistService {
 	private readonly _HttpClient = inject(HttpClient);
 	private readonly _AuthService = inject(AuthService);
 	private readonly userHeader = this._AuthService.getUserToken();
-
+	inWishListProudctsIds: string[] = [];
 	getLoggedUserWishlist(): Observable<any> {
 		return this._HttpClient.get(`${environment.BaseUrl}/api/v1/wishlist`, {
 			headers: { token: this.userHeader! },
 		});
 	}
 	addProductToWishlist(id: string): Observable<any> {
-		return this._HttpClient.post(
-			`${environment.BaseUrl}/api/v1/wishlist`,
-			{
-				productId: `${id}`,
-			},
-			{ headers: { token: this.userHeader! } }
-		);
+		return this._HttpClient.post(`${environment.BaseUrl}/api/v1/wishlist`, {
+			productId: `${id}`,
+		});
 	}
 	removeProductFromWishlist(id: string): Observable<any> {
 		return this._HttpClient.delete(
-			`${environment.BaseUrl}/api/v1/wishlist/${id}`,
-			{
-				headers: { token: this.userHeader! },
-			}
+			`${environment.BaseUrl}/api/v1/wishlist/${id}`
 		);
 	}
 }
