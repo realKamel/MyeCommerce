@@ -15,8 +15,9 @@
 					placeholder="name@example.com" />
 				<label for="floatingInputEmail">Email address</label>
 			</div>
-			@if (logInForm.get('email')?.errors &&
-			logInForm.get('email')?.touched && logInForm.get('email')?.dirty) {
+			@if ((logInForm.get('email')?.errors && logInForm.get('email')?.touched)
+			||
+			logInForm.get('email')?.errors && logInForm.get('email')?.dirty) {
 			<div class="alert alert-danger">
 				@if (logInForm.get('email')?.getError('required')) {
 				<p class="m-0">Email is Required</p>
@@ -42,9 +43,10 @@
 					placeholder="Password" />
 				<label for="floatingPassword">Password</label>
 			</div>
-			@if (logInForm.get('password')?.errors &&
-			logInForm.get('password')?.touched &&
-			logInForm.get('password')?.dirty) {
+			@if ((logInForm.get('password')?.errors &&
+			logInForm.get('password')?.touched) ||
+			(logInForm.get('password')?.errors &&
+			logInForm.get('password')?.dirty)) {
 			<div class="alert alert-danger">
 				@if (logInForm.get('password')?.getError('required')) {
 				<p class="m-0">Password is Required</p>

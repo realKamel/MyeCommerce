@@ -2,40 +2,6 @@
 	object-position: center;
 	object-fit: cover;
 }
-.card i {
-	position: relative;
-	display: inline-block;
-	font-size: 1rem;
-	padding-right: 0.1rem;
-	color: #d3d3d3;
-}
-
-.card .filled {
-	color: #ffe234;
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.add-btn {
-	transition: all 0.5s;
-	position: relative;
-	transform: translateY(300px);
-}
-.add-btn:hover {
-	color: white !important;
-	filter: brightness(0.8);
-}
-
-.fa-heart:hover {
-	color: red !important;
-}
-
-.card:hover .add-btn {
-	transform: translateY(0);
-}
-
 @media screen and (min-width: 768px) {
 	.my-static-carousel {
 		width: 50% !important;

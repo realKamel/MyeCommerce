@@ -14,9 +14,9 @@
 					}" formControlName="name" type="text" class="form-control mb-3" id="floatingNameInput" placeholder="Name" />
 				<label for="floatingNameInput">Name</label>
 			</div>
-			@if (registerForm.get('name')?.errors &&
-			registerForm.get('name')?.touched &&
-			registerForm.get('name')?.dirty) {
+			@if ((registerForm.get('name')?.errors &&
+			registerForm.get('name')?.touched) ||
+			(registerForm.get('name')?.errors && registerForm.get('name')?.dirty)) {
 			<div class="alert alert-danger">
 				@if (registerForm.get('name')?.getError('required')) {
 				<p class="m-0">Name is Required</p>
@@ -41,9 +41,10 @@
 					placeholder="name@example.com" />
 				<label for="floatingInputEmail">Email address</label>
 			</div>
-			@if (registerForm.get('email')?.errors &&
-			registerForm.get('email')?.touched &&
-			registerForm.get('email')?.dirty) {
+			@if ((registerForm.get('email')?.errors &&
+			registerForm.get('email')?.touched )||
+			(registerForm.get('email')?.errors &&
+			registerForm.get('email')?.dirty)) {
 			<div class="alert alert-danger">
 				@if (registerForm.get('email')?.getError('required')) {
 				<p class="m-0">Email is Required</p>
@@ -70,7 +71,8 @@
 				<label for="floatingPassword">Password</label>
 			</div>
 			@if (registerForm.get('password')?.errors &&
-			registerForm.get('password')?.touched &&
+			registerForm.get('password')?.touched ||
+			registerForm.get('password')?.errors &&
 			registerForm.get('password')?.dirty) {
 			<div class="alert alert-danger">
 				@if (registerForm.get('password')?.getError('required')) {
@@ -95,7 +97,9 @@
 				<label for="floatingrePassword">Re-Password</label>
 			</div>
 			@if (registerForm.getError('mismatch') &&
-			registerForm.get('rePassword')?.touched) {
+			registerForm.get('rePassword')?.touched ||
+			registerForm.getError('mismatch') &&
+			registerForm.get('rePassword')?.dirty){
 			<div class="alert alert-danger">
 				<p class="m-0">Re-Password must match Password</p>
 			</div>
@@ -115,7 +119,8 @@
 				<label for="floatingInputPhone">Phone Number</label>
 			</div>
 			@if (registerForm.get('phone')?.errors &&
-			registerForm.get('phone')?.touched &&
+			registerForm.get('phone')?.touched ||
+			registerForm.get('phone')?.errors &&
 			registerForm.get('phone')?.dirty) {
 			<div class="alert alert-danger">
 				@if (registerForm.get('phone')?.getError('required')) {

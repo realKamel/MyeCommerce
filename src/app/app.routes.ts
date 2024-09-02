@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-
 import { AuthComponent } from "./layouts/auth/auth.component";
 import { BlankComponent } from "./layouts/blank/blank.component";
 import { NotfoundComponent } from "./components/notfound/notfound.component";
@@ -10,7 +9,6 @@ import { CartComponent } from "./components/cart/cart.component";
 import { ProductComponent } from "./components/product/product.component";
 import { authGuard } from "./guards/auth.guard";
 import { logedInGuard } from "./guards/loged-in.guard";
-import { ForgetPasswordComponent } from "./components/forget-password/forget-password.component";
 
 export const routes: Routes = [
 	{
@@ -75,7 +73,13 @@ export const routes: Routes = [
 			{ path: "", redirectTo: "login", pathMatch: "full" },
 			{ path: "login", component: LoginComponent },
 			{ path: "register", component: RegisterComponent },
-			{ path: "forget", component: ForgetPasswordComponent },
+			{
+				path: "forget",
+				loadComponent: () =>
+					import(
+						"./components/forget-password/forget-password.component"
+					).then((c) => c.ForgetPasswordComponent),
+			},
 		],
 	},
 	{ path: "**", component: NotfoundComponent },

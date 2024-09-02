@@ -22,7 +22,9 @@ i {
 	color: white !important;
 	filter: brightness(0.8);
 }
-
+.card:hover .add-btn {
+	transform: translateY(0);
+}
 .make-red {
 	color: red !important;
 }
