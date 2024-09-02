@@ -7,16 +7,10 @@ import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { HomeComponent } from "./components/home/home.component";
 import { CartComponent } from "./components/cart/cart.component";
-import { BrandsComponent } from "./components/brands/brands.component";
-import { CategorieComponent } from "./components/categorie/categorie.component";
 import { ProductComponent } from "./components/product/product.component";
-import { WishlistComponent } from "./components/wishlist/wishlist.component";
-import { ProductDetailsComponent } from "./components/product-details/product-details.component";
 import { authGuard } from "./guards/auth.guard";
 import { logedInGuard } from "./guards/loged-in.guard";
 import { ForgetPasswordComponent } from "./components/forget-password/forget-password.component";
-import { CheckOutComponent } from "./components/check-out/check-out.component";
-import { AllOrdersComponent } from "./components/all-orders/all-orders.component";
 
 export const routes: Routes = [
 	{
@@ -25,15 +19,52 @@ export const routes: Routes = [
 		canActivate: [logedInGuard],
 		children: [
 			{ path: "", redirectTo: "home", pathMatch: "full" },
+			{ path: "Home", redirectTo: "home", pathMatch: "full" },
 			{ path: "home", component: HomeComponent },
 			{ path: "cart", component: CartComponent },
-			{ path: "brands", component: BrandsComponent },
-			{ path: "categories", component: CategorieComponent },
+			{
+				path: "brands",
+				loadComponent: () =>
+					import("./components/brands/brands.component").then(
+						(c) => c.BrandsComponent
+					),
+			},
+			{
+				path: "categories",
+				loadComponent: () =>
+					import("./components/categorie/categorie.component").then(
+						(c) => c.CategorieComponent
+					),
+			},
 			{ path: "product", component: ProductComponent },
-			{ path: "wishlist", component: WishlistComponent },
-			{ path: "ProductDetails/:id", component: ProductDetailsComponent },
-			{ path: "checkOut/:cart_id", component: CheckOutComponent },
-			{ path: "allorders", component: AllOrdersComponent },
+			{
+				path: "wishlist",
+				loadComponent: () =>
+					import("./components/wishlist/wishlist.component").then(
+						(c) => c.WishlistComponent
+					),
+			},
+			{
+				path: "ProductDetails/:id",
+				loadComponent: () =>
+					import(
+						"./components/product-details/product-details.component"
+					).then((c) => c.ProductDetailsComponent),
+			},
+			{
+				path: "checkOut/:cart_id",
+				loadComponent: () =>
+					import("./components/check-out/check-out.component").then(
+						(c) => c.CheckOutComponent
+					),
+			},
+			{
+				path: "allorders",
+				loadComponent: () =>
+					import("./components/all-orders/all-orders.component").then(
+						(c) => c.AllOrdersComponent
+					),
+			},
 		],
 	},
 	{
