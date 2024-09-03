@@ -20,7 +20,7 @@ export class OrdersService {
 	}
 	checkOutSession(cartId: string, userData: object): Observable<any> {
 		return this._HttpClient.post(
-			`${environment.BaseUrl}/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,
+			`${environment.BaseUrl}/api/v1/orders/checkout-session/${cartId}?url=https://freshkartt.netlify.app`,
 			{
 				shippingAddress: userData,
 			}
