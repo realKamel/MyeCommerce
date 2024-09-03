@@ -16,7 +16,8 @@ import {
 import { HttpErrorResponse } from "@angular/common/http";
 import { finalize, Subscription } from "rxjs";
 import { NgClass } from "@angular/common";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: "app-register",
@@ -27,6 +28,8 @@ import { RouterLink } from "@angular/router";
 })
 export class RegisterComponent implements OnDestroy {
 	private _AuthService: AuthService = inject(AuthService);
+	private _ToastrService = inject(ToastrService);
+	private _Router = inject(Router);
 	private signUpSub!: Subscription;
 	isLoading: WritableSignal<boolean> = signal(false);
 
@@ -66,8 +69,11 @@ export class RegisterComponent implements OnDestroy {
 				.signUp(this.registerForm.value)
 				.pipe(finalize(() => this.isLoading.set(false)))
 				.subscribe({
-					next: (value) => {
-						console.log(value);
+					next: (res) => {
+						this._ToastrService.success(res.message);
+						this._AuthService.setUserToken(res.token);
+						this._Router.navigate(["/home"]);
+						console.log(res);
 					},
 					error: (error: HttpErrorResponse) => {
 						console.error(error.error.message);
