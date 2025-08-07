@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom } from "@angular/core";
+import {
+	ApplicationConfig,
+	importProvidersFrom,
+	provideZoneChangeDetection,
+} from "@angular/core";
 import {
 	provideRouter,
 	RouterModule,
@@ -32,6 +36,7 @@ export const appConfig: ApplicationConfig = {
 			withViewTransitions()
 		),
 		provideClientHydration(),
+		provideZoneChangeDetection({ ignoreChangesOutsideZone: true }),
 		provideHttpClient(
 			withFetch(),
 			withInterceptors([
