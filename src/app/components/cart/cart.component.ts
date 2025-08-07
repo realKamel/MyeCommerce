@@ -16,11 +16,10 @@ import { Router, RouterLink } from "@angular/router";
 import { OrdersService } from "../../services/orders.service";
 
 @Component({
-	selector: "app-cart",
-	standalone: true,
-	imports: [CurrencyPipe,RouterLink],
-	templateUrl: "./cart.component.html",
-	styleUrl: "./cart.component.scss",
+    selector: "app-cart",
+    imports: [CurrencyPipe, RouterLink],
+    templateUrl: "./cart.component.html",
+    styleUrl: "./cart.component.scss"
 })
 export class CartComponent implements OnInit, OnDestroy {
 	readonly _CartService = inject(CartService);

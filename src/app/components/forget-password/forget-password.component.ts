@@ -18,11 +18,10 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 
 @Component({
-	selector: "app-forget-password",
-	standalone: true,
-	imports: [ReactiveFormsModule, NgClass],
-	templateUrl: "./forget-password.component.html",
-	styleUrl: "./forget-password.component.scss",
+    selector: "app-forget-password",
+    imports: [ReactiveFormsModule, NgClass],
+    templateUrl: "./forget-password.component.html",
+    styleUrl: "./forget-password.component.scss"
 })
 export class ForgetPasswordComponent implements OnDestroy {
 	private readonly _AuthService = inject(AuthService);

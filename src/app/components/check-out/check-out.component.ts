@@ -11,11 +11,10 @@ import { NgClass } from "@angular/common";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-	selector: "app-check-out",
-	standalone: true,
-	imports: [ReactiveFormsModule, NgClass],
-	templateUrl: "./check-out.component.html",
-	styleUrl: "./check-out.component.scss",
+    selector: "app-check-out",
+    imports: [ReactiveFormsModule, NgClass],
+    templateUrl: "./check-out.component.html",
+    styleUrl: "./check-out.component.scss"
 })
 export class CheckOutComponent implements OnInit {
 	private readonly _ActivatedRoute = inject(ActivatedRoute);

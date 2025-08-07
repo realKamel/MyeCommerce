@@ -13,11 +13,10 @@ import { IBrand } from "../../interfaces/ibrand";
 import { Subscription } from "rxjs";
 
 @Component({
-	selector: "app-brands",
-	standalone: true,
-	imports: [],
-	templateUrl: "./brands.component.html",
-	styleUrl: "./brands.component.scss",
+    selector: "app-brands",
+    imports: [],
+    templateUrl: "./brands.component.html",
+    styleUrl: "./brands.component.scss"
 })
 export class BrandsComponent implements OnInit, OnDestroy {
 	private modalService = inject(NgbModal);

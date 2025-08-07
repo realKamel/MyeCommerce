@@ -20,11 +20,10 @@ import { Router, RouterLink } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-	selector: "app-register",
-	standalone: true,
-	imports: [ReactiveFormsModule, NgClass, RouterLink],
-	templateUrl: "./register.component.html",
-	styleUrl: "./register.component.scss",
+    selector: "app-register",
+    imports: [ReactiveFormsModule, NgClass, RouterLink],
+    templateUrl: "./register.component.html",
+    styleUrl: "./register.component.scss"
 })
 export class RegisterComponent implements OnDestroy {
 	private _AuthService: AuthService = inject(AuthService);

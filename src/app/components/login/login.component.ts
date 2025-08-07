@@ -18,11 +18,10 @@ import { Router, RouterLink } from "@angular/router";
 import { NgClass } from "@angular/common";
 
 @Component({
-	selector: "app-login",
-	standalone: true,
-	imports: [ReactiveFormsModule, NgClass, RouterLink],
-	templateUrl: "./login.component.html",
-	styleUrl: "./login.component.scss",
+    selector: "app-login",
+    imports: [ReactiveFormsModule, NgClass, RouterLink],
+    templateUrl: "./login.component.html",
+    styleUrl: "./login.component.scss"
 })
 export class LoginComponent implements OnDestroy {
 	private _AuthService: AuthService = inject(AuthService);

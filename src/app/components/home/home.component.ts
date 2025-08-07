@@ -14,11 +14,10 @@ import { ICategory } from "../../interfaces/icategory";
 import { ProductComponent } from "../product/product.component";
 
 @Component({
-	selector: "app-home",
-	standalone: true,
-	imports: [RouterLink, CarouselModule, ProductComponent],
-	templateUrl: "./home.component.html",
-	styleUrl: "./home.component.scss",
+    selector: "app-home",
+    imports: [RouterLink, CarouselModule, ProductComponent],
+    templateUrl: "./home.component.html",
+    styleUrl: "./home.component.scss"
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	private readonly _CategoriesService = inject(CategoriesService);

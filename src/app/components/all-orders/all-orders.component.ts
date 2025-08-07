@@ -14,11 +14,10 @@ import { NgbAccordionModule } from "@ng-bootstrap/ng-bootstrap";
 import { CurrencyPipe, DatePipe, NgClass } from "@angular/common";
 
 @Component({
-	selector: "app-all-orders",
-	standalone: true,
-	imports: [NgbAccordionModule, NgClass, CurrencyPipe, DatePipe],
-	templateUrl: "./all-orders.component.html",
-	styleUrl: "./all-orders.component.scss",
+    selector: "app-all-orders",
+    imports: [NgbAccordionModule, NgClass, CurrencyPipe, DatePipe],
+    templateUrl: "./all-orders.component.html",
+    styleUrl: "./all-orders.component.scss"
 })
 export class AllOrdersComponent implements OnInit, OnDestroy {
 	private readonly _OrdersService = inject(OrdersService);

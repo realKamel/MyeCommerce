@@ -20,18 +20,17 @@ import { CartService } from "../../services/cart.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-	selector: "app-product",
-	standalone: true,
-	imports: [
-		NgbRating,
-		RouterLink,
-		FormsModule,
-		SearchFilterPipe,
-		CurrencyPipe,
-		NgClass,
-	],
-	templateUrl: "./product.component.html",
-	styleUrl: "./product.component.scss",
+    selector: "app-product",
+    imports: [
+        NgbRating,
+        RouterLink,
+        FormsModule,
+        SearchFilterPipe,
+        CurrencyPipe,
+        NgClass,
+    ],
+    templateUrl: "./product.component.html",
+    styleUrl: "./product.component.scss"
 })
 export class ProductComponent implements OnInit, OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);

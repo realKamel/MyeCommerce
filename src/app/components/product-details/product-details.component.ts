@@ -15,11 +15,10 @@ import { NgbRating } from "@ng-bootstrap/ng-bootstrap";
 import { CurrencyPipe } from "@angular/common";
 
 @Component({
-	selector: "app-product-details",
-	standalone: true,
-	imports: [CarouselModule, NgbRating, CurrencyPipe],
-	templateUrl: "./product-details.component.html",
-	styleUrl: "./product-details.component.scss",
+    selector: "app-product-details",
+    imports: [CarouselModule, NgbRating, CurrencyPipe],
+    templateUrl: "./product-details.component.html",
+    styleUrl: "./product-details.component.scss"
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 	private readonly _ActivatedRoute = inject(ActivatedRoute);

@@ -15,11 +15,10 @@ import { CartService } from "../../services/cart.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
-	selector: "app-wishlist",
-	standalone: true,
-	imports: [CurrencyPipe],
-	templateUrl: "./wishlist.component.html",
-	styleUrl: "./wishlist.component.scss",
+    selector: "app-wishlist",
+    imports: [CurrencyPipe],
+    templateUrl: "./wishlist.component.html",
+    styleUrl: "./wishlist.component.scss"
 })
 export class WishlistComponent implements OnInit, OnDestroy {
 	private readonly _WishlistService = inject(WishlistService);

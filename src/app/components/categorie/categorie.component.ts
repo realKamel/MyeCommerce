@@ -12,11 +12,10 @@ import { Subscription } from "rxjs";
 import { ISubcategory } from "../../interfaces/isubcategory";
 
 @Component({
-	selector: "app-categorie",
-	standalone: true,
-	imports: [],
-	templateUrl: "./categorie.component.html",
-	styleUrl: "./categorie.component.scss",
+    selector: "app-categorie",
+    imports: [],
+    templateUrl: "./categorie.component.html",
+    styleUrl: "./categorie.component.scss"
 })
 export class CategorieComponent implements OnInit, OnDestroy {
 	_CategoriesService = inject(CategoriesService);
