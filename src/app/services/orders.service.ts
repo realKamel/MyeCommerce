@@ -7,23 +7,23 @@ import { AuthService } from "./auth.service";
 import { Observable } from "rxjs";
 
 @Injectable({
-	providedIn: "root",
+  providedIn: "root",
 })
 export class OrdersService {
-	private readonly _HttpClient = inject(HttpClient);
-	private readonly _AuthService = inject(AuthService);
+  private readonly _HttpClient = inject(HttpClient);
+  private readonly _AuthService = inject(AuthService);
 
-	getUserOrders(): Observable<any> {
-		return this._HttpClient.get(
-			`${environment.BaseUrl}/api/v1/orders/user/${this._AuthService.userData.id}`
-		);
-	}
-	checkOutSession(cartId: string, userData: object): Observable<any> {
-		return this._HttpClient.post(
-			`${environment.BaseUrl}/api/v1/orders/checkout-session/${cartId}?url=https://freshkartt.netlify.app`,
-			{
-				shippingAddress: userData,
-			}
-		);
-	}
+  getUserOrders(): Observable<any> {
+    return this._HttpClient.get(
+      `${environment.baseUrl}/api/v1/orders/user/${this._AuthService.userData.id}`
+    );
+  }
+  checkOutSession(cartId: string, userData: object): Observable<any> {
+    return this._HttpClient.post(
+      `${environment.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=https://freshkartt.netlify.app`,
+      {
+        shippingAddress: userData,
+      }
+    );
+  }
 }
