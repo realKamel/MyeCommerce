@@ -12,12 +12,12 @@ import { Subscription } from "rxjs";
 import { ISubcategory } from "../../interfaces/isubcategory";
 
 @Component({
-  selector: "app-categorie",
+  selector: "app-categories",
   imports: [],
-  templateUrl: "./categorie.component.html",
-  styleUrl: "./categorie.component.css",
+  templateUrl: "./categories.component.html",
+  styleUrl: "./categories.component.css",
 })
-export class CategorieComponent implements OnInit, OnDestroy {
+export class CategoriesComponent implements OnInit, OnDestroy {
   _CategoriesService = inject(CategoriesService);
   AllCategoriesRes: WritableSignal<ICategory[]> = signal([]);
   SubCategoryName: WritableSignal<string> = signal("");
