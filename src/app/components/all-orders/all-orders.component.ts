@@ -1,10 +1,10 @@
 import {
-	Component,
-	inject,
-	OnDestroy,
-	OnInit,
-	signal,
-	WritableSignal,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  WritableSignal,
 } from "@angular/core";
 import { OrdersService } from "../../services/orders.service";
 import { IOrders } from "../../interfaces/iorders";
@@ -14,27 +14,27 @@ import { NgbAccordionModule } from "@ng-bootstrap/ng-bootstrap";
 import { CurrencyPipe, DatePipe, NgClass } from "@angular/common";
 
 @Component({
-    selector: "app-all-orders",
-    imports: [NgbAccordionModule, NgClass, CurrencyPipe, DatePipe],
-    templateUrl: "./all-orders.component.html",
-    styleUrl: "./all-orders.component.scss"
+  selector: "app-all-orders",
+  imports: [NgbAccordionModule, NgClass, CurrencyPipe, DatePipe],
+  templateUrl: "./all-orders.component.html",
+  styleUrl: "./all-orders.component.css",
 })
 export class AllOrdersComponent implements OnInit, OnDestroy {
-	private readonly _OrdersService = inject(OrdersService);
+  private readonly _OrdersService = inject(OrdersService);
 
-	getUserOrders: WritableSignal<IOrders[]> = signal([]);
-	getUserOrdersSub!: Subscription;
-	ngOnInit(): void {
-		this.getUserOrdersSub = this._OrdersService.getUserOrders().subscribe({
-			next: (res) => {
-				this.getUserOrders.set(res);
-			},
-			error: (err: HttpErrorResponse) => {
-				console.error(err.error.message);
-			},
-		});
-	}
-	ngOnDestroy(): void {
-		this.getUserOrdersSub?.unsubscribe();
-	}
+  getUserOrders: WritableSignal<IOrders[]> = signal([]);
+  getUserOrdersSub!: Subscription;
+  ngOnInit(): void {
+    this.getUserOrdersSub = this._OrdersService.getUserOrders().subscribe({
+      next: (res) => {
+        this.getUserOrders.set(res);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error(err.error.message);
+      },
+    });
+  }
+  ngOnDestroy(): void {
+    this.getUserOrdersSub?.unsubscribe();
+  }
 }

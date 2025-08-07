@@ -1,10 +1,10 @@
 import {
-	Component,
-	inject,
-	OnDestroy,
-	OnInit,
-	signal,
-	WritableSignal,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+  WritableSignal,
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProductsService } from "../../services/products.service";
@@ -15,45 +15,45 @@ import { NgbRating } from "@ng-bootstrap/ng-bootstrap";
 import { CurrencyPipe } from "@angular/common";
 
 @Component({
-    selector: "app-product-details",
-    imports: [CarouselModule, NgbRating, CurrencyPipe],
-    templateUrl: "./product-details.component.html",
-    styleUrl: "./product-details.component.scss"
+  selector: "app-product-details",
+  imports: [CarouselModule, NgbRating, CurrencyPipe],
+  templateUrl: "./product-details.component.html",
+  styleUrl: "./product-details.component.css",
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
-	private readonly _ActivatedRoute = inject(ActivatedRoute);
-	private readonly _ProductsService = inject(ProductsService);
-	productId: WritableSignal<string | null> = signal("");
-	SpcificProdRes: WritableSignal<IProduct> = signal({} as IProduct);
-	SpcificProdSubscribe!: Subscription;
+  private readonly _ActivatedRoute = inject(ActivatedRoute);
+  private readonly _ProductsService = inject(ProductsService);
+  productId: WritableSignal<string | null> = signal("");
+  SpcificProdRes: WritableSignal<IProduct> = signal({} as IProduct);
+  SpcificProdSubscribe!: Subscription;
 
-	ngOnInit(): void {
-		this._ActivatedRoute.paramMap.subscribe({
-			next: (p) => {
-				this.productId.set(p.get("id"));
-				this.SpcificProdSubscribe = this._ProductsService
-					.getSpcificProduct(this.productId())
-					.subscribe({
-						next: (res) => {
-							this.SpcificProdRes.set(res.data);
-						},
-					});
-			},
-		});
-	}
-	customOptions: OwlOptions = {
-		loop: true,
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: false,
-		dots: false,
-		navSpeed: 700,
-		navText: ["", ""],
-		items: 1,
-		nav: true,
-	};
+  ngOnInit(): void {
+    this._ActivatedRoute.paramMap.subscribe({
+      next: (p) => {
+        this.productId.set(p.get("id"));
+        this.SpcificProdSubscribe = this._ProductsService
+          .getSpcificProduct(this.productId())
+          .subscribe({
+            next: (res) => {
+              this.SpcificProdRes.set(res.data);
+            },
+          });
+      },
+    });
+  }
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ["", ""],
+    items: 1,
+    nav: true,
+  };
 
-	ngOnDestroy(): void {
-		this.SpcificProdSubscribe?.unsubscribe();
-	}
+  ngOnDestroy(): void {
+    this.SpcificProdSubscribe?.unsubscribe();
+  }
 }
