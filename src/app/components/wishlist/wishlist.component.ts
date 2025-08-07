@@ -8,11 +8,12 @@ import {
   WritableSignal,
 } from "@angular/core";
 import { WishlistService } from "../../services/wishlist.service";
-import { finalize, Subscription } from "rxjs";
+import { finalize, Subject, takeUntil } from "rxjs";
 import { IWishlist } from "../../interfaces/iwishlist";
 import { CurrencyPipe } from "@angular/common";
 import { CartService } from "../../services/cart.service";
 import { ToastrService } from "ngx-toastr";
+import { toast } from "ngx-sonner";
 
 @Component({
   selector: "app-wishlist",
@@ -25,16 +26,16 @@ export class WishlistComponent implements OnInit, OnDestroy {
   private readonly _ToastrService = inject(ToastrService);
   private readonly _CartService = inject(CartService);
   getLoggedUserWishlistRes: WritableSignal<IWishlist[]> = signal([]);
-  private getLoggedUserWishlistSub!: Subscription;
-  private addProductToCartSub!: Subscription;
-  private removeProductFromWishlistSub!: Subscription;
+  protected readonly destroy$ = new Subject<void>();
+
   ngOnInit(): void {
     this.getAllWishList();
   }
 
   getAllWishList() {
-    this.getLoggedUserWishlistSub = this._WishlistService
+    this._WishlistService
       .getLoggedUserWishlist()
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res: IWishlistRes) => {
           this.getLoggedUserWishlistRes.set(res.data);
@@ -50,12 +51,13 @@ export class WishlistComponent implements OnInit, OnDestroy {
       .pipe(
         finalize(() => {
           this.getAllWishList();
-        })
+        }),
+        takeUntil(this.destroy$)
       )
       .subscribe({
-        next: (res) => {
-          this._ToastrService.success(res.message);
-          this._WishlistService.inWishListProudctsIds = res.data;
+        next: (result) => {
+          toast.success(result.message);
+          this._WishlistService.inWishListProductsIds.set(result.data);
         },
         error: (err) => {
           console.error(err);
@@ -63,12 +65,13 @@ export class WishlistComponent implements OnInit, OnDestroy {
       });
   }
   addToCart(id: string) {
-    this.addProductToCartSub = this._CartService
+    this._CartService
       .addProductToCart(id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (res) => {
-          this._CartService.numOfCartItems.set(res.numOfCartItems);
-          this._ToastrService.success(res.message);
+        next: (result) => {
+          this._CartService.numOfCartItems.set(result.numOfCartItems);
+          toast.success(result.message);
         },
         error: (err) => {
           console.error(err);
@@ -76,8 +79,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
       });
   }
   ngOnDestroy(): void {
-    this.getLoggedUserWishlistSub?.unsubscribe();
-    this.addProductToCartSub?.unsubscribe();
-    this.removeProductFromWishlistSub?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

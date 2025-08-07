@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from "@angular/common/http";
-import { Inject, Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 
@@ -8,7 +8,7 @@ import { environment } from "../../environments/environment";
   providedIn: "root",
 })
 export class ProductsService {
-  private readonly _HttpClient: HttpClient = Inject(HttpClient);
+  private readonly _HttpClient = inject(HttpClient);
   getAllProducts(): Observable<any> {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/products`);
   }

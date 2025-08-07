@@ -1,21 +1,21 @@
 import {
-	ApplicationConfig,
-	importProvidersFrom,
-	provideZoneChangeDetection,
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
 } from "@angular/core";
 import {
-	provideRouter,
-	RouterModule,
-	withInMemoryScrolling,
-	withViewTransitions,
+  provideRouter,
+  RouterModule,
+  withInMemoryScrolling,
+  withViewTransitions,
 } from "@angular/router";
 
 import { routes } from "./app.routes";
 import { provideClientHydration } from "@angular/platform-browser";
 import {
-	provideHttpClient,
-	withFetch,
-	withInterceptors,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
 } from "@angular/common/http";
 import { provideAnimations } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -26,27 +26,27 @@ import { provideToastr } from "ngx-toastr";
 import { NgxSpinnerModule } from "ngx-spinner";
 
 export const appConfig: ApplicationConfig = {
-	providers: [
-		provideRouter(
-			routes,
-			withInMemoryScrolling({
-				scrollPositionRestoration: "top",
-			}),
-			//withHashLocation(),
-			withViewTransitions()
-		),
-		provideClientHydration(),
-		provideZoneChangeDetection({ ignoreChangesOutsideZone: true }),
-		provideHttpClient(
-			withFetch(),
-			withInterceptors([
-				headerInterceptor,
-				errorInterceptor,
-				loadingInterceptor,
-			])
-		),
-		provideAnimations(),
-		importProvidersFrom(NgbModule, RouterModule, NgxSpinnerModule),
-		provideToastr(),
-	],
+  providers: [
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: "top",
+      }),
+      //withHashLocation(),
+      withViewTransitions()
+    ),
+    provideClientHydration(),
+    provideZoneChangeDetection({ ignoreChangesOutsideZone: true }),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        headerInterceptor,
+        errorInterceptor,
+        loadingInterceptor,
+      ])
+    ),
+    provideAnimations(),
+    importProvidersFrom(NgbModule, RouterModule, NgxSpinnerModule),
+    provideToastr(),
+  ],
 };

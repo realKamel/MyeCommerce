@@ -24,20 +24,18 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _ProductsService = inject(ProductsService);
   productId: WritableSignal<string | null> = signal("");
-  SpcificProdRes: WritableSignal<IProduct> = signal({} as IProduct);
-  SpcificProdSubscribe!: Subscription;
+  SpecificProdRes: WritableSignal<IProduct> = signal({} as IProduct);
+  SpecificProdSubscribe!: Subscription;
 
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe({
       next: (p) => {
         this.productId.set(p.get("id"));
-        this.SpcificProdSubscribe = this._ProductsService
-          .getSpcificProduct(this.productId())
-          .subscribe({
-            next: (res) => {
-              this.SpcificProdRes.set(res.data);
-            },
-          });
+        this._ProductsService.getSpecificProduct(this.productId()).subscribe({
+          next: (res) => {
+            this.SpecificProdRes.set(res.data);
+          },
+        });
       },
     });
   }
@@ -54,6 +52,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   };
 
   ngOnDestroy(): void {
-    this.SpcificProdSubscribe?.unsubscribe();
+    this.SpecificProdSubscribe?.unsubscribe();
   }
 }
